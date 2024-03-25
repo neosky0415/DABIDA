@@ -1,0 +1,131 @@
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      layout:decorate="~{manager/managerlayout}"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>전체 가입자</title>
+</head>
+
+<div layout:fragment="content">
+    <div class="d-flex flex-column mb-3">
+    <h5 class=" ms-5 mt-4 mb-1 border-bottom" style="width:80rem;">홈페이지 가입자 명단</h5>
+        <div class="ms-5 mb-3" style="font-size:13px;">
+            가입자 : 총 <b><span th:text="${count}" style="color:rgb(30, 143, 124);"></span></b>명
+        </div>
+        <div class="d-flex flex-row-reverse">
+            <div class="row">
+                <form method="get"  th:action="@{/chartsList}">
+                    <table class="pull-right">
+                        <tr>
+                            <td>
+                                        <select  name="searchUsername"  class="form-select form-select-sm">
+                                            <option value="" style="font-size:12px;color:rgb(90, 90, 90);">작성자 선택</option>
+                                            <option th:each="score : ${userSearchList}"
+                                                    th:value="${score.username}"
+                                                    th:text="${score.username}">
+                                            </option>
+                                        </select>
+                                        <select   name="searchTestSubject"  class="form-select form-select-sm">
+                                            <option value="" style="font-size:12px;color:rgb(90, 90, 90);">영역 선택</option>
+                                            <option th:each="score : ${newSearchList}"
+                                                    th:value="${score.testSubject}"
+                                                    th:text="${score.testSubject}">
+                                            </option>
+                                        </select>
+
+                            </td>
+                            <td><button type="submit" class="btn btn btn-link btn-sm"
+                                        style="text-decoration:none;background-color:rgb(122, 172, 196);color:white;width:3rem;font-size:13px;">
+                                검색
+                            </button>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+        </div>
+
+
+    <table class="table mb-5 mt-3 ms-5" style="width:80rem;">
+
+        <tr class="table-info">
+            <td style="font-size:13px;color:rgb(122, 122, 122);">순서</td>
+            <td style="font-size:13px;color:rgb(122, 122, 122);">영역</td>
+            <td style="font-size:13px;color:rgb(122, 122, 122);">이름</td>
+            <td style="font-size:13px;color:rgb(122, 122, 122);">1월</td>
+            <td style="font-size:13px;color:rgb(122, 122, 122);">2월</td>
+            <td style="font-size:13px;color:rgb(122, 122, 122);">3월</td>
+            <td style="font-size:13px;color:rgb(122, 122, 122);">4월</td>
+            <td style="font-size:13px;color:rgb(122, 122, 122);">5월</td>
+            <td style="font-size:13px;color:rgb(122, 122, 122);">6월</td>
+            <td style="font-size:13px;color:rgb(122, 122, 122);">7월</td>
+            <td style="font-size:13px;color:rgb(122, 122, 122);">8월</td>
+            <td style="font-size:13px;color:rgb(122, 122, 122);">9월</td>
+            <td style="font-size:13px;color:rgb(122, 122, 122);">10월</td>
+            <td style="font-size:13px;color:rgb(122, 122, 122);">11월</td>
+            <td style="font-size:13px;color:rgb(122, 122, 122);">12월</td>
+            <td style="font-size:13px;color:rgb(122, 122, 122);">수정</td>
+
+
+        </tr>
+
+        <tr th:each="score, stat: ${userList}">
+            <form th:action="@{/charts_admin_edit/{uuid}(id=${score.uuid})}" method="post" class="d-flex">
+            <td>[[${stat.count}]]</td>
+
+                <td><input class="form-control form-control-sm" th:value="${score.testSubject}"  readonly name="testSubject"></td>
+                <td><input class="form-control form-control-sm" th:value="${score. realName}"  readonly name="realName"></td>
+                <td><input class="form-control form-control-sm" th:value="${score. month01}" name="month01"></td>
+                <td><input class="form-control form-control-sm" th:value="${score. month02}" name="month02"></td>
+                <td><input class="form-control form-control-sm" th:value="${score. month03}" name="month03"></td>
+                <td><input class="form-control form-control-sm" th:value="${score. month04}" name="month04"></td>
+                <td><input class="form-control form-control-sm" th:value="${score. month05}" name="month05"></td>
+                <td><input class="form-control form-control-sm" th:value="${score.month06}" name="month06"></td>
+                <td><input class="form-control form-control-sm" th:value="${score.month07}" name="month07"></td>
+                <td><input class="form-control form-control-sm" th:value="${score.month08}" name="month08"></td>
+                <td><input class="form-control form-control-sm" th:value="${score.month09}" name="month09"></td>
+                <td><input class="form-control form-control-sm" th:value="${score.month10}" name="month10"></td>
+                <td><input class="form-control form-control-sm" th:value="${score.month11}" name="month11"></td>
+                <td><input class="form-control form-control-sm" th:value="${score.month12}" name="month12"></td>
+
+                <td>
+                    <button class="flex-shrink-0 btn btn-link btn-sm" type="submit"
+                            style="text-decoration:none;color:white;background-color:rgb(122, 172, 196);width:5rem;">
+                        수정
+                    </button>
+                </td>
+            </form>
+        </tr>
+    </table>
+
+        <div th:if="${!userList.isEmpty()}">
+            <nav class="fixed-bottom">
+                <ul class="pagination pagination-sm justify-content-center">
+                    <li class="page-item" th:classappend="${!userList.hasPrevious} ? 'disabled'">
+                        <a class="page-link" th:href="@{|?page=${ userList.number-1}|}"><span>이전</span></a>
+                    </li>
+
+                    <li th:each="page: ${#numbers.sequence(0,  userList.totalPages-1)}"
+                        th:if="${page >=  userList.number-2 and page <=  userList.number+2}"
+                        th:classappend="${page ==  userList.number} ? 'active'" class="page-item">
+                        <a th:text="${page+1}" class="page-link" th:href="@{|?page=${page}|}"></a>
+                    </li>
+
+                    <li class="page-item" th:classappend="${! userList.hasNext} ? 'disabled'">
+                        <a class="page-link" th:href="@{|?page=${ userList.number+1}|}"><span>다음</span></a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+</div>
+</div>
+<br>
+<br>
+
+<th:block layout:fragment="extra_script">
+
+</th:block>

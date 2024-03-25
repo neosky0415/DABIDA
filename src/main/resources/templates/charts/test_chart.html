@@ -1,0 +1,248 @@
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      layout:decorate="~{manager/managerlayout}"
+>
+<head>
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/charts.js"></script>
+    <script>
+        $(function() {
+
+            var backgroundColors = [
+                'rgba(241, 30, 30, 0.2)',
+                'rgba(15, 56, 241 , 0.2)',
+                'rgba(28, 223, 54, 0.2)',
+                'rgba(235, 152, 58, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(209, 86, 127, 0.2)',
+            ];
+
+            var borderColors = [
+                'rgb(241, 30, 30)', //빨
+                'rgb(15, 56, 241)', //파
+                'rgb(28, 223, 54)', //초
+                'rgb(235, 152, 58)', //주
+                'rgb(209, 86, 127)', //핑
+            ];
+
+            $.getJSON("/rest/pie-data", function(json) {
+                new Chart(document.getElementById("piechartContainer"), {
+                    type: 'pie',
+                    data: {
+                        labels: json[0],
+                        datasets: [{
+                            backgroundColor: backgroundColors,
+                            borderColor: borderColors,
+                            borderWidth: 1,
+                            hoverOffset: 4,
+                            data: json[1]
+                        }]
+                    },
+                    options: {
+                        title: {
+                            display: true,
+                            text: 'Pie Chart'
+                        },
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero:true
+                                }
+                            }]
+                        }
+                    }
+                });
+            });
+
+            $.getJSON("/rest/pie-data", function(json) {
+                new Chart(document.getElementById("barchartContainer"), {
+                    type: 'bar',
+                    data: {
+                        labels: json[0],
+                        datasets: [{
+                            label: 'My First Dataset',
+                            backgroundColor: backgroundColors,
+                            borderColor: borderColors,
+                            borderWidth: 1,
+                            hoverOffset: 4,
+                            data: json[1]
+                        }]
+                    },
+                    options: {
+                        title: {
+                            display: true,
+                            text: 'Bar Chart'
+                        },
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero:true
+                                }
+                            }]
+                        }
+                    }
+                });
+            });
+
+            $.getJSON("/rest/pie-data", function(json) {
+                new Chart(document.getElementById("linechartContainer"), {
+                    type: 'line',
+                    data: {
+                        labels: json[0],
+                        datasets: [{
+                            label: '학생수',
+                            backgroundColor: backgroundColors[4],
+                            borderColor: borderColors[4],
+                            fill: false,
+                            borderWidth: 2,
+                            hoverOffset: 4,
+                            data: json[1]
+                        }]
+                    },
+                    options: {
+                        title: {
+                            display: true,
+                            text: 'Line Chart'
+                        },
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero:true
+                                }
+                            }]
+                        }
+                    }
+                });
+            });
+
+            $.getJSON("/rest/score-data", function(json) {
+                new Chart(document.getElementById("stackchartContainer"), {
+                    type: 'line',
+                    data: {
+                        labels: json[0]["data"],
+                        datasets: [{
+                            label: json[1]["name"],
+                            backgroundColor: backgroundColors[0],
+                            borderColor: borderColors[0],
+                            fill: false,
+                            borderWidth: 1,
+                            hoverOffset: 4,
+                            data: json[1]["data"]
+                        },{
+                            label: json[2]["name"],
+                            backgroundColor: backgroundColors[1],
+                            borderColor: borderColors[1],
+                            fill: false,
+                            borderWidth: 1,
+                            hoverOffset: 4,
+                            data: json[2]["data"]
+                        },{
+                            label: json[3]["name"],
+                            backgroundColor: backgroundColors[2],
+                            borderColor: borderColors[2],
+                            fill: false,
+                            borderWidth: 1,
+                            hoverOffset: 4,
+                            data: json[3]["data"]
+                        }]
+                    },
+                    options: {
+                        title: {
+                            display: true,
+                            text: 'Line Chart'
+                        },
+                        responsive: true,
+                        maintainAspectRatio: false,
+
+
+    				scales: {
+    				yAxes: [{
+    					ticks: {
+    					min: 0, max: 100
+
+
+    					}
+    				}]
+    			}
+
+                    }
+                });
+            });
+
+        });
+    </script>
+
+</head>
+
+<div layout:fragment="content">
+    <div class="container">
+        <div class="d-flex flex-column mb-1">
+                <div class="mt-3 mb-2" style="font-size:13px;">
+                    <i class="bi bi-person-vcard"></i> 학생정보
+                </div>
+
+                <form th:object="${userOptional}">
+                    <input th:field="*{id}" type="hidden" class="form-control">
+                        <div class="card mt-2 " style="width:23rem; height:11rem;">
+                            <div class="d-flex flex-row">
+                                <div class="mt-3">
+                                    <input type="hidden" th:field="*{userImgPath}" class="form-control">
+                                    <div th:if="${user.getUserImgPath() eq null}">
+                                        <img class="img-fluid p-2"  style=" width:8rem;height:8rem;"  th:src="@{/images/mug.png}">
+                                    </div>
+                                    <div th:unless="${user.getUserImgPath() eq null}">
+                                        <img class="img-fluid p-2" th:src="@{|/uploads/${user.getUserImgPath()}|}" style=" width:8rem;height:8rem;">
+                                    </div>
+                                </div>
+
+                                <div class="card-body">
+                                    <div class="mt-1  mb-2" style="font-size:16px;">
+                                        <b><span th:text="${studentName}"></span></b>
+                                    </div>
+                                    <div style="font-size:13px;" class="mb-2">
+                                        배정반: <b><span th:text="${user.teamName}" style="font-size:14px;"></span></b>
+                                    </div>
+                                    <div style="font-size:13px;" class="mb-2">
+                                        전 화: <b><span th:text="${studentPhone}" style="font-size:14px;"></span></b>
+                                    </div>
+                                    <div style="font-size:13px;" class="mb-2">
+                                        부모님 전화: <b><span th:text="${studentPhone2}" style="font-size:14px;"></span></b>
+                                    </div>
+                                    <div style="font-size:13px;" class="mb-2">
+                                        아이디: <b><span th:text="${studentId}" style="font-size:14px;"></span></b>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+
+            <div class="mt-5 mb-2" style="color:rgb(112, 112, 112);font-size:13px;">
+                <i class="bi bi-bar-chart-line"></i> <span style="color:black;font-size:15px;" th:text="${studentName}"></span> 학생 성적 그래프
+            </div>
+
+            <div style="width:80rem;height:20rem;" class="mt-3">
+                <canvas id="stackchartContainer"></canvas>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+<th:block layout:fragment="script-content">
+
+</th:block>
+
+</html>
+

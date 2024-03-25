@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      layout:decorate="~{layout/layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>출제 list</title>
+</head>
+
+<div layout:fragment="content">
+
+
+    <h5 class="mt-5 ms-5 mb-3"><i class="bi bi-clipboard-check"></i>나의 응시목록</h5>
+
+    <table class="table table-striped ms-5 mt-3 mb-3" style="width: 100rem;">
+        <tr>
+            <td><strong>등록순서</strong></td>
+            <td><strong>사진</strong></td>
+            <td></td>
+            <td><strong>응시번호</strong></td>
+            <td><strong>응시자</strong></td>
+            <td><strong>응시일정</strong></td>
+            <td><strong>응시과목</strong></td>
+            <td><strong>응시/수정일자</strong></td>
+        </tr>
+        <tr th:each="testNumber, stat : ${testNumberMyList}">
+            <td>[[${stat.count}]]</td>
+            <td><img  class='img-thumbnail' width="70px" height="100px" th:src="@{|/upload/${name}|}"><td>
+
+            <td>[[${testNumber.testNumber}]]</td>
+            <td>[[${testNumber.userName}]]</td>
+            <td>[[${testNumber.date}]]</td>
+            <td>[[${testNumber.title}]]</td>
+            <td>
+                <div th:if="${testNumber.createdAt eq testNumber.editedAt}" >
+                    <div>[[${#dates.format(testNumber.createdAt, 'yyyy.MM.dd HH:MM')}]]&nbsp;</div>
+                </div>
+                <div th:unless="${testNumber.createdAt eq testNumber.editedAt}" >
+                    <div>[[${#dates.format(testNumber.createdAt, 'yyyy.MM.dd HH:MM')}]]&nbsp;,&nbsp;</div>
+                    <div>[[${#dates.format(testNumber.editedAt, 'yyyy.MM.dd HH:MM')}]]</div>
+                </div>
+            </td>
+        </tr>
+    </table>
+
+
+
+
+
+<th:block layout:fragment="script-content">
+
+
+
+
+</th:block>
+
+
+
+
+</div>

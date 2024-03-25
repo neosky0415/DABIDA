@@ -1,0 +1,45 @@
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      layout:decorate="~{manager/managerlayout}"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>등록반</title>
+</head>
+
+
+<div layout:fragment="content">
+
+    <div class="container">
+        <div class="mt-4 mb-2 border-bottom p-1" style="font-size:14px;">
+            개강 반에서 학생 정보를 확인 할 수 있습니다.
+        </div>
+
+        <div class="d-flex flex-row flex-wrap mt-5 mb-3">
+            <div th:each="team, stat : ${countList}" class="card border-secondary me-5 mb-5" style="max-width:20rem;" id="cards">
+                <a th:href="@{/studentManage/team_student_list/{uuid}(uuid=${team.uuid})}" style="color:black;">
+                    <div class="card-header" style="font-size:17px;">
+                        <span style="font-size:13px;color:rgb(83, 83, 83);">[[${stat.count}]]</span>. <span style="color:rgb(41, 146, 160);"><b>[[${team.teamName}]]</b></span>
+                    </div>
+                <div class="card-body">
+                    <div class="card-title" style="font-size:13px;color:rgb(153, 152, 152);">
+                            [[${team.teamName}]]반 학생들의 성적을 확인해 보세요.
+                    </div>
+                    <p class="card-text">
+                        <div style="font-size:13px;">수강인원:[[${team.count}]]명</div>
+                        <div style="font-size:13px;">개강일: [[${#dates.format(team.createdAt, 'yyyy년MM월dd일 E요일')}]]</div>
+                    </p>
+                </div>
+                </a>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+<th:block layout:fragment="script-content">
+
+</th:block>

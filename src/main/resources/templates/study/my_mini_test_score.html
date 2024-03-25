@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      rel="stylesheet" href="/css/test.css"
+      layout:decorate="~{layout/layout}">
+<head>
+  <meta charset="UTF-8">
+  <title>나의강의실</title>
+</head>
+
+<div layout:fragment="content">
+
+  <ul class="nav justify-content-center mt-2 bg-body-tertiary" style="font-size:14px;">
+    <li class="nav-item border-end p-3 me-3">
+      <a href="/my_mini_test" style="color:black;">
+        <div class="me-2" id="study" ><i class="bi bi-pencil-fill"></i> 쪽지시험</div>
+      </a>
+    </li>
+    <li class="nav-item border-end p-3 me-3">
+      <a href="/my_mini_test_score">
+        <div class="me-2" id="study2" style="color:rgb(243, 138, 138);"><i class="bi bi-file-earmark-text-fill"></i> 내 쪽지 시험지 확인</div>
+      </a>
+    </li>
+    <li class="nav-item border-end p-3 me-3">
+      <a href="/my_test" style="color:black;">
+        <div class="me-2" id="study3"><i class="bi bi-pencil"></i> 월말평가</div>
+      </a>
+    </li>
+    <li class="nav-item  p-3 me-3">
+      <a href="/my_test_score" style="color:black;">
+        <div class="me-2" id="study4"><i class="bi bi-file-earmark-text"></i> 내 월말 시험지 확인</div>
+      </a>
+    </li>
+  </ul>
+
+  <div class="container">
+
+    <div class="d-flex justify-content-center border-bottom mt-5">
+      <h3 class="mt-5">
+        내가 본 쪽지 시험
+      </h3>
+    </div>
+
+    <div class="d-flex justify-content-end mt-3">
+        <table class="pull-right">
+          <tr>
+            <td>
+              <select class="form-select form-select-sm" name="searchRoles"  style="width:5rem;font-size:13px;" >
+                <option value="" >과목</option>
+                <option value="ROLE_ADMIN">영어</option>
+                <option value="ROLE_USER">수학</option>
+              </select>
+            </td>
+            <td>
+              <button type="submit" class="btn btn btn-link btn-sm"
+                      style="text-decoration:none;background-color:rgb(240, 187, 187);color:white;width:3rem;font-size:13px;">
+                조회
+              </button>
+            </td>
+
+          </tr>
+        </table>
+    </div>
+
+
+    <div class="d-flex justify-content-end mt-5">
+      <table class="table table table-striped">
+        <tr>
+          <td style="width:3rem; font-size:13px;">번호</td>
+          <td style="width:7rem;font-size:13px;">과목</td>
+          <td style="width:13rem;font-size:13px;">시험</td>
+          <td style="width:7rem;font-size:13px;">점수</td>
+          <td style="width:10rem;font-size:13px;">응시일</td>
+          <td style="width:5rem;font-size:13px;">응시자</td>
+          <td style="width:6rem;font-size:13px;">결과</td>
+        </tr>
+        <tr th:each="miniTestStudents, stat : ${miniSummitStudentsMyList}">
+          <td>
+            <div class="p-2" style="font-size:13px;">[[${stat.count}]]</div>
+          </td>
+          <td>
+            <div class="pt-2" style="font-size:13px;">[[${miniTestStudents.testNumber.subject.subject}]]</div>
+          </td>
+          <td>
+            <div class="pt-2" style="font-size:13px;">[[${miniTestStudents.testNumber.miniTitle}]]</div>
+          </td>
+          <td>
+            <div class="pt-2" style="font-size:13px;color:red;">[[${miniTestStudents.testedInfo.score}]]</div>
+          </td>
+          <td>
+            <div class="pt-2" style="font-size:13px;" th:text="${formatTestedAt}"></div>
+          </td>
+          <td>
+            <div class="pt-2" style="font-size:13px;">[[${miniTestStudents.user.realName}]]</div>
+          </td>
+          <td>
+            <a th:href="@{/tested_view/{uuid}(uuid=${miniTestStudents.testedInfo.uuid})}"   class="btn btn-link btn-sm" id="test1" style="text-decoration: none;font-size:13px;color:white;background-color:rgb(127, 189, 240);">
+              시험지확인
+            </a>
+          </td>
+
+        </tr>
+
+      </table>
+    </div>
+
+  </div>
+</div>

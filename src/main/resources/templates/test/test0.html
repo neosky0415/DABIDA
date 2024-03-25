@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      rel="stylesheet" href="/css/test.css"
+      layout:decorate="~{layout/layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>자격증_시험</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <br>
+    <br>
+    <div id="my_modal">
+        <iframe src="/test" id="chat_iframe"></iframe>
+        <button onclick="triggerCustomCloseEvent()">Close Modal</button>
+        <a class="modal_close_btn"><i class="bi bi-x-lg"></i></a>
+    </div>
+
+    <th:block layout:fragment="script-content">
+        <script>
+            // Element 에 style 한번에 오브젝트로 설정하는 함수 추가
+            Element.prototype.setStyle = function (styles) {
+                for (var k in styles) this.style[k] = styles[k];
+                return this;
+            };
+
+            var isModalOpen = false; // Track if a modal is open
+
+            function openModal() {
+                var modal = document.getElementById('my_modal');
+
+                // Set isModalOpen to true when the modal is open
+                isModalOpen = true;
+
+                // 모달 div 뒤에 희끄무레한 레이어
+                var bg = document.createElement('div');
+                bg.setStyle({
+                    position: 'fixed',
+                    zIndex: 9999,
+                    left: '0px',
+                    top: '0px',
+                    width: '100%',
+                    height: '100%',
+                    overflow: 'auto',
+                    backgroundColor: 'rgba(0,0,0,0.4)'
+                });
+                document.body.append(bg);
+
+                // Disable scrolling when the modal is open
+                document.body.style.overflow = 'hidden';
+
+                // 닫기 버튼 처리, 시꺼먼 레이어와 모달 div 지우기
+                modal.querySelector('.modal_close_btn').addEventListener('click', function () {
+                    bg.remove();
+                    modal.style.display = 'none';
+
+                    // Enable scrolling when the modal is closed
+                    document.body.style.overflow = 'auto';
+                });
+
+                // Listen for a custom close event
+                document.addEventListener('customCloseModalEvent', function () {
+                    bg.remove();
+                    modal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                });
+
+                modal.setStyle({
+                    position: 'fixed',
+                    display: 'block',
+                    width: '100%',
+                    height: '100%',
+                    margin: '0',
+                    padding: '0',
+                    boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
+                    zIndex: 10000,
+                    top: '0',
+                    left: '0',
+                    transform: 'none',
+                    msTransform: 'none',
+                    webkitTransform: 'none'
+                });
+            }
+
+            // Example code to close the modal
+            function closeCurrentModal() {
+                isModalOpen = false;
+                document.dispatchEvent(new Event('customCloseModalEvent'));
+            }
+
+            // Function to trigger custom close event
+            function triggerCustomCloseEvent() {
+                closeCurrentModal();
+            }
+            window.addEventListener('beforeunload', function (e) {
+                // Display a confirmation message if a modal is open
+                if (isModalOpen) {
+                    var confirmationMessage = "You have unsaved changes. Are you sure you want to leave?";
+                    e.returnValue = confirmationMessage; // Standard for most browsers
+                    return confirmationMessage; // For some older browsers
+                }
+            });
+
+            // Add event listener for keydown (F5)
+            window.addEventListener('keydown', function (e) {
+                // Prevent the default behavior if the F5 key is pressed and a modal is open
+                if (e.key === 'F5' && isModalOpen) {
+                    e.preventDefault();
+                    console.log('F5 key is disabled while the modal is open.'); // Debugging
+                }
+            });
+
+            // Function to open the modal
+            openModal();
+        </script>
+    </th:block>
+</div>
+</body>
+</html>

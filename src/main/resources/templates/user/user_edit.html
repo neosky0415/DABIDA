@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <title>ROLE EDIT</title>
+</head>
+
+<div layout:fragment="content">
+    <br>
+    <h5 class="mt-3 ms-5"><i class="bi bi-person-fill-slash"></i> 권 한 수 정</h5>
+
+    <form th:action="@{/userRole_edit}" th:object="${userOptional}" method="post">
+
+
+        <div class="card mt-3 mb-5 offset-1" style="width:20rem;">
+            <div class="card-body">
+                <input type="hidden" th:field="*{id}">
+
+                <div class="mb-3" style="width:18rem;">
+                    <label for="username" class="form-label" style="font-size:14px;">아이디</label>
+                    <input th:field="*{username}" type="text" style="font-size:14px;" class="form-control" id="username" readonly>
+                </div>
+
+                <div class="p-3 bg-info bg-opacity-10 border border-info border-start mb-1">
+                    <div class="row">
+                        <div style="font-size:14px;">
+                            <div >권한 선택</div>
+                            <input type="checkbox"  th:field="*{roles}"  th:value="ROLE_ADMIN" th:checked="ROLE_ADMIN"  class="form-check-input">
+                            <label  th:text="관리자"  class="form-check-label"></label>
+                            <input type="checkbox"  th:field="*{roles}" th:value="ROLE_MANAGER" th:checked="ROLE_MANAGER"   class="form-check-input">
+                            <label  th:text="교직원"  class="form-check-label"></label>
+                            <input type="checkbox"  th:field="*{roles}" th:value="ROLE_STUDENT" th:checked="ROLE_STUDENT"   class="form-check-input">
+                            <label  th:text="학생"  class="form-check-label"></label>
+                            <input type="checkbox"  th:field="*{roles}" th:value="ROLE_USER" th:checked="ROLE_USER"   class="form-check-input">
+                            <label  th:text="일반"  class="form-check-label"></label>
+                        </div>
+
+                        <div class="mt-2 mb-3">
+                            <label class="col-form-label" style="font-size:14px;"><b style="color:rgb(216, 14, 14);">*</b>로그인 제한 해제</label>
+                            <input type="number" style="width:8rem;" th:field="*{loginFailureCount}" min="0" class="form-control form-control-sm">
+                        </div>
+                    </div>
+                    <button style="width:8rem;" class="btn btn-outline-info btn-sm" value="롤 변경" type="Submit">수 정</button>
+                </div>
+            </div>
+        </div>
+
+    </form>
+
+    <br>
+    <br>
+    <br>
+</div>
+</html>
+
+

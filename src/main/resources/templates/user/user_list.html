@@ -1,0 +1,148 @@
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      layout:decorate="~{manager/managerlayout}"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>전체 가입자</title>
+</head>
+
+<div layout:fragment="content">
+    <div class="d-flex flex-column mb-3">
+    <h5 class=" ms-5 mt-4 mb-1 border-bottom" style="width:80rem;">홈페이지 가입자 명단</h5>
+        <div class="ms-5 mb-3" style="font-size:13px;">
+            가입자 : 총 <b><span th:text="${count}" style="color:rgb(30, 143, 124);"></span></b>명
+        </div>
+
+        <div class="d-flex flex-row-reverse">
+            <div class="row">
+                <form method="get"  th:action="@{/userList}">
+                    <table class="pull-right">
+                        <tr>
+                            <td>
+                                <select class="form-select form-select-sm" name="searchRoles"  style="width:5rem;font-size:13px;" >
+                                    <option value="" >전체</option>
+                                    <option value="ROLE_ADMIN">교사</option>
+                                    <option value="ROLE_USER">학생</option>
+                                </select>
+                            </td>
+                            <td><button type="submit" class="btn btn btn-link btn-sm"
+                                        style="text-decoration:none;background-color:rgb(122, 172, 196);color:white;width:3rem;font-size:13px;">
+                                검색
+                            </button>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+        </div>
+
+
+    <table class="table mb-5 mt-3 ms-5" style="width:80rem;">
+
+        <tr class="table-info">
+            <td style="font-size:13px;color:rgb(122, 122, 122);"></td>
+            <td style="font-size:13px;color:rgb(122, 122, 122);">ID</td>
+            <td style="font-size:13px;color:rgb(122, 122, 122);">이름</td>
+            <td style="font-size:13px;color:rgb(122, 122, 122);">등급</td>
+            <td style="font-size:13px;color:rgb(122, 122, 122);">등급변경</td>
+            <td style="font-size:13px;color:rgb(122, 122, 122);">로그인 제한</td>
+            <td style="font-size:13px;color:rgb(122, 122, 122);">로그인 제한 해제</td>
+            <td style="font-size:13px;color:rgb(122, 122, 122);">등록,수정 일</td>
+            <td style="font-size:13px;color:rgb(122, 122, 122);">편집</td>
+        </tr>
+
+        <tr th:each="user, stat: ${userList}">
+            <form th:action="@{/user_admin_edit/{id}(id=${user.id})}"  method="post" class="d-flex">
+            <td>[[${stat.count}]].</td>
+
+                <td style="font-size:14px;">
+                    <div th:if="${user.getRoles() eq 'ROLE_ADMIN'}">
+                        <a th:href="@{/admin_staff_info/__${user.username}__}" onclick="window.open(this.href,'/admin_staff_info', 'width=700, height=400, left=600, top=300, scrollbars=no');return false;"  style="text-decoration:none;">[[${user.username}]]</a>
+                    </div>
+                    <div th:unless="${user.getRoles() eq 'ROLE_ADMIN'}">
+                        <a th:href="@{/admin_my_info/__${user.username}__}" onclick="window.open(this.href,'/admin_my_info', 'width=700, height=400, left=600, top=300, scrollbars=no');return false;" style="text-decoration:none;">[[${user.username}]]</a>
+                    </div>
+                </td>
+
+                <td style="font-size:13px;">
+                    <div class="pt-1">[[${user.realName}]]</div>
+                </td>
+                <td style="font-size:13px;">
+                    <div th:if="${user.roles eq 'ROLE_ADMIN'}">
+                        <div class="pt-1">교사</div>
+                    </div>
+                    <div th:unless="${user.roles eq 'ROLE_ADMIN'}">
+                        <div class="pt-1">학생</div>
+                    </div>
+                </td>
+                <td>
+                    <select class="form-select form-select-sm" name="roles" id="roles" th:value="${user.roles}" style="width:7rem;font-size:13px;">
+                        <option th:selected="${user.roles}=='ROLE_ADMIN'" th:value="ROLE_ADMIN" style="font-size:13px;">교사</option>
+                        <option th:selected="${user.roles}=='ROLE_USER'" th:value="ROLE_USER"  style="font-size:13px;">학생</option>
+                    </select>
+                </td>
+
+
+
+                <td style="font-size:13px;">
+                    <div class="pt-1">
+                        [[${user.loginFailureCount}]]
+                    </div>
+                </td>
+                <td>
+                    <button type="submit" class="btn btn-link btn-sm"
+                            name="loginFailureCount" value="0" style="text-decoration:none;font-size:13px;color:rgb(134, 134, 134);">
+                        <span class="login"><i class="bi bi-unlock"></i>제한 해제</span>
+                    </button>
+                </td>
+
+            <td style="font-size:14px;">
+                <div th:if="${user.createdAt eq user.editedAt}">
+                    <div>[[${#dates.format(user.createdAt, 'yyyy-MM-dd hh:mm')}]]</div>
+                </div>
+                <div th:unless="${user.createdAt eq user.editedAt}">
+                    <div style="color:rgb(122, 122, 122);">[[${#dates.format(user.createdAt, 'yyyy-MM-dd hh:mm')}]]&nbsp;,&nbsp;</div>
+                    <div>[[${#dates.format(user.editedAt, 'yyyy-MM-dd hh:mm:ss')}]]</div>
+                </div>
+            </td>
+                <td>
+                    <button class="flex-shrink-0 btn btn-link btn-sm" type="submit"
+                            style="text-decoration:none;color:white;background-color:rgb(122, 172, 196);width:5rem;">
+                        수정
+                    </button>
+                </td>
+            </form>
+        </tr>
+    </table>
+
+        <div th:if="${!userList.isEmpty()}">
+            <nav class="fixed-bottom">
+                <ul class="pagination pagination-sm justify-content-center">
+                    <li class="page-item" th:classappend="${!userList.hasPrevious} ? 'disabled'">
+                        <a class="page-link" th:href="@{|?page=${ userList.number-1}|}"><span>이전</span></a>
+                    </li>
+
+                    <li th:each="page: ${#numbers.sequence(0,  userList.totalPages-1)}"
+                        th:if="${page >=  userList.number-2 and page <=  userList.number+2}"
+                        th:classappend="${page ==  userList.number} ? 'active'" class="page-item">
+                        <a th:text="${page+1}" class="page-link" th:href="@{|?page=${page}|}"></a>
+                    </li>
+
+                    <li class="page-item" th:classappend="${! userList.hasNext} ? 'disabled'">
+                        <a class="page-link" th:href="@{|?page=${ userList.number+1}|}"><span>다음</span></a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+</div>
+</div>
+<br>
+<br>
+
+<th:block layout:fragment="extra_script">
+
+</th:block>

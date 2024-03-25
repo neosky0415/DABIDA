@@ -1,0 +1,81 @@
+*{
+font-family: 'Gothic A1', sans-serif;
+}
+
+.validation_error{
+         font-size:13px;
+         color:rgb(247, 88, 76);
+}
+
+a{
+text-decoration: none;
+}
+
+.selB:hover{
+cursor: pointer;
+background:rgb(214, 213, 213);
+}
+.selB{
+font-size:14px;
+}
+
+#m1:hover{
+background:rgb(114, 136, 155);
+}
+#m2:hover{
+cursor: pointer;
+background:rgb(114, 136, 155);
+}
+#m3:hover{
+background:rgb(114, 136, 155);
+}
+#m4:hover{
+background:rgb(114, 136, 155);
+}
+#m5:hover{
+background:rgb(114, 136, 155);
+}
+#m6:hover{
+background:rgb(114, 136, 155);
+}
+#m7:hover{
+background:rgb(114, 136, 155);
+}
+#m8:hover{
+background:rgb(114, 136, 155);
+}
+
+
+
+.ban:hover{
+  color: rgb(84, 161, 167);
+}
+
+#info1{
+color:rgb(110, 108, 108);
+              }
+#info1:hover{
+color:rgb(122, 172, 196);
+              }
+#info2{
+color:rgb(110, 108, 108);
+              }
+#info2:hover{
+color:rgb(122, 172, 196);
+}
+#info3{
+color:rgb(110, 108, 108);
+              }
+#info3:hover{
+color:rgb(122, 172, 196);
+}
+
+.login:hover{
+color:rgb(243, 142, 142);
+}
+
+
+#cards:hover{
+transform: scale(1.2);
+transition: all 0.2s linear;
+}

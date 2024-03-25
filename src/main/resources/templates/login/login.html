@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.2/css/bootstrap.min.css}"/>
+    <script src="webjars/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap-icons/1.11.1/font/bootstrap-icons.css}" />
+    <link rel="stylesheet" href="/css/test.css">
+    <link rel="stylesheet" href="/js/test.js">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat&family=Edu+TAS+Beginner:wght@500&family=Sunflower:wght@300&family=The+Girl+Next+Door&display=swap" rel="stylesheet">
+
+    <link rel="icon" type="image/png" sizes="16x16"  href="images/favicon-16x16.png">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="theme-color" content="#ffffff">
+    <style>
+        .lo{
+        color:rgb(247, 142, 81);
+        font-size:50px;
+        font-family: 'The Girl Next Door', cursive;
+        }
+    </style>
+</head>
+
+
+<div class="container">
+    <br>
+    <br>
+    <div  class="row justify-content-md-center mt-5">
+        <a href="/" class="col-md-auto mt-5" style="color:rgb(107, 107, 107); font-size:25px;">
+            <img th:src="@{/images/logo.png}" style="height:3rem;">
+        </a>
+    </div>
+
+    <form th:action="@{/login}" method="post" class="form-signin">
+
+        <div class="d-flex justify-content-center mt-5">
+            <div th:if="${param.error}">
+                <div th:if="${session.containsKey('SPRING_SECURITY_LAST_EXCEPTION')}">
+                    <div class="alert alert-danger" style="font-size:12px;">
+                        <i class="bi bi-exclamation-triangle-fill" style="font-size:13px;"></i>
+                        아이디 또는 비밀번호를 잘못 입력했습니다.<br>
+                        입력하신 내용을 다시 확인해주세요.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="d-flex justify-content-center">
+            <div class="mt-5 mb-2" style="color:rgb(59, 59, 59); width:25rem;">
+                로그인
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-center">
+            <div class="d-flex flex-row">
+                <div>
+                    <div class="d-flex flex-column" style="width:20rem;">
+                        <div>
+                            <input class="form-control form-control-sm"  name="username" type="text" placeholder="아이디(이메일)" style="height:2rem;" required/>
+                        </div>
+                        <div>
+                            <input class="form-control form-control-sm" name="password" type="password" placeholder="비밀번호" style="height:2rem;" required/>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                        <button type="submit" class="btn btn-link" value="Login" style="background-color:rgb(248, 183, 183);width:5rem;height:4rem;
+                        text-decoration:none;color:white;font-size:13px;">
+                            로그인
+                        </button>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="d-flex justify-content-center">
+            <div class="d-flex mt-1 mb-3 border-bottom " style="width:25rem;">
+                <div class="p-2">
+                    <a href="find_id" class="border-end pe-1" style="text-decoration:none; color:rgb(59, 59, 59); font-size:13px;">아이디 찾기</a>
+                </div>
+                <div class="pt-2">
+                    <a href="find_password" style="text-decoration:none; color:rgb(59, 59, 59); font-size:13px;">비밀번호 찾기</a>
+                </div>
+                <div class="ms-auto p-2">
+                    <a href="/user/user" style="text-decoration:none;color:black;font-size:13px;">회원가입</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-center mt-2">
+                <a href="/oauth2/authorization/kakao" target="_blank">
+                    <div class="border" style="width:25rem;">
+                        <div type="button" class="btn btn-link m-1 ps-2 pe-2 pt-1 pb-1" style="text-decoration:none;background-color:rgb(250, 250, 53);">
+                            <i class="bi bi-chat-fill float-start" style="color:rgb(48, 18, 5);"></i>
+                        </div>
+                        <span style="color:rgb(59, 59, 59);font-size:13px;">카카오 로그인</span>
+                    </div>
+                </a>
+        </div>
+
+
+        <div class="d-flex justify-content-center mt-2">
+                <a href="/oauth2/authorization/naver" target="_blank">
+                    <div class="border" style="width:25rem;">
+                        <div type="button" class="btn btn-link m-1 ps-2 pe-2 pt-1 pb-1"
+                             style="text-decoration:none;background-color: rgb(81, 196, 28);">
+                            <span class="float-start" style="color:rgb(253, 253, 253);"><b>N</b></span>
+                        </div>
+                        <span class="ms-1" style="color:rgb(59, 59, 59);font-size:13px;">네이버 로그인</span>
+                    </div>
+                </a>
+        </div>
+
+
+
+
+</form>
+</div>

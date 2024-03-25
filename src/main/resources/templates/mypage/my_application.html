@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      layout:decorate="~{layout/layout}">
+<head>
+  <meta charset="UTF-8">
+  <title>시험 신청</title>
+</head>
+<div layout:fragment="content">
+  <div class="mt-5" style="font-size:22px;" align="center"><b>신 청 완 료</b></div>
+<br>
+<br>
+  <div class="card offset-4 mt-3 mb-3" style="max-width:540px;" >
+    <div class="row g-0">
+      <div class="col-md-4">
+        <img  class='img-thumbnail' width="200px" height="240px" th:src="@{|/upload/${name}|}">
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <div class="card-title" style="background-color:#cac9c9; text-align:center; height:32px; color:#272525; font-size:16px;">응 시 자 명</div>
+          <p th:text="${testName}" class="card-title" style="text-align: center;"></p>
+          <div class="card-title" style="background-color:#cac9c9; text-align:center; height:32px; color:#272525; font-size:16px;">응 시 일 정</div>
+          <p th:text="${testDate}" class="card-text" style="text-align: center;"></p>
+          <div style="background-color:#cac9c9; text-align:center; height:32px; color:#272525; font-size:16px;">응 시 과 목</div>
+          <p th:text="${testTitle}" class="card-text" style="text-align: center;"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+<br>
+<br>
+<br>
+
+</div>

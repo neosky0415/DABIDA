@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.2/css/bootstrap.min.css}"/>
+    <script src="webjars/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap-icons/1.11.1/font/bootstrap-icons.css}" />
+    <link rel="stylesheet" href="/css/test1.css">
+    <link rel="stylesheet" href="/js/test.js">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat&family=Edu+TAS+Beginner:wght@500&family=Gothic+A1&family=Nanum+Gothic+Coding&family=Noto+Sans+KR&family=Shadows+Into+Light&family=Sunflower:wght@300&family=The+Girl+Next+Door&display=swap" rel="stylesheet">
+
+    <link rel="icon" type="image/png" sizes="16x16"  href="images/favicon-16x16.png">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="theme-color" content="#ffffff">
+    <meta charset="UTF-8">
+    <title>반 수정</title>
+</head>
+
+<div class="container">
+        <div class="mt-3 border-bottom p-2" style="color:rgb(240, 84, 84);"><i class="bi bi-pencil"></i> 편집</div>
+
+        <form th:action="@{/team_edit}" th:object="${teamForm}" method="POST">
+            <input th:field="*{uuid}" type="hidden" class="form-control">
+            <div class="row g-3 align-items-center mt-2">
+                <div class="col-auto">
+                    <label for="team" class="col-form-label">반 입력</label>
+                </div>
+                <div class="col-auto">
+                    <input th:field="*{teamName}" th:value="${teamForm.teamName}" type="text" id="team" class="form-control">
+                </div>
+                <div class="col-auto">
+                    <button type="submit" class="btn btn-link btn-sm " style="text-decoration: none;color:white;background-color:rgb(159, 159, 159); ">
+                        등 록
+                    </button>
+                    <button type="button" class="btn btn-link btn-sm " onclick="window.close();window.opener.location.reload();" style="text-decoration: none;color:white;background-color:rgb(229, 132, 154); ">
+                        닫 기
+                    </button>
+                </div>
+            </div>
+            <div class="validation_error offset-2 mt-2" th:if="${#fields.hasErrors('teamName')}" th:errors="*{teamName}"></div>
+        </form>
+</div>
+
+<th:block layout:fragment="script-content">
+
+
+
+
+</th:block>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      layout:decorate="~{layout/layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>회원탈퇴</title>
+</head>
+
+<div layout:fragment="content">
+
+    <div class="offset-1 d-flex flex-row mt-3 mb-3" style="font-size:14px;">
+        <a href="/myinfo" class="border-end me-2"><div class="p-2" id="in1"><b>프로필 수정</b></div></a>
+        <a href="/my_password" class="border-end me-2"><div class="p-2" id="in2"><b>보안설정</b></div></a>
+        <a href="/userDelete" class="border-end me-2"><div class="p-2" id="in3" style="color:rgb(253, 174, 174);"><b>회원탈퇴</b></div></a>
+    </div>
+
+    <div class="d-flex justify-content-center">
+        <div class="d-flex flex-column mt-3 mb-3 p-2 border" style="width:30rem;">
+            <div class="p-2" style="color:rgb(146, 146, 146); font-size:13px;">
+                계정 삭제시 내가 참여했던 시험과 내 하위 항목이 모두 삭제 됩니다.<br>
+                삭제 처리 후에는 회원님의 개인정보를 복원할 수 없으며,<br>
+                화원 탈퇴 진행시 해당 아이디는 영구적으로 삭제되어 재가입이 불가 합니다.
+            </div>
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-center">
+        <div class="mb-3">
+            <a th:href="@{/userDelete_password}" onclick="window.open(this.href,'/userDelete_password', 'width=800, height=400, left=600, top=300, scrollbars=no');return false;"
+               class="btn btn-danger" style="font-size:15px; width:8rem;">
+                계 정 삭 제
+            </a>
+        </div>
+    </div>
+</div>
+
+
+
+<th:block layout:fragment="script-content">
+
+
+
+
+</th:block>

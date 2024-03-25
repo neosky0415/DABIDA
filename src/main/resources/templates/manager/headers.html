@@ -1,0 +1,17 @@
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<th:block th:fragment="header">
+    <div class=" d-block d-flex flex-row p-2 ms-3 mt-2" style="width:98%;background-color:rgb(32, 32, 32);">
+        <a href="/manager" class="me-auto ms-3 p-2">
+            <div style="color:white;font-size:13px;"><i class="bi bi-house"></i> 교직원 전용</div>
+        </a>
+        <a href="/" class="btn btn-link me-2" style="text-decoration:none;color:rgb(216, 238, 241);font-size:14px; width:6rem; height:2rem;">
+            학생전용<i class="bi bi-house-door"></i></a>
+
+        <span sec:authorize="isAuthenticated()">
+            <a th:href="@{/logout}"  class="btn btn-link" style="text-decoration:none;color:rgb(216, 238, 241);font-size:14px; width:5rem; height:2rem;">
+                로그아웃
+            </a>
+        </span>
+    </div>
+
+</th:block>

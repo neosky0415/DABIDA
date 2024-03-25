@@ -1,0 +1,283 @@
+@font-face {
+    font-family: 'JeonjuCraftGoR';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2310@1.0/JeonjuCraftGoR.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+#bar{
+   margin-left: 0%;
+   border-bottom: 0.8px solid rgb(168, 168, 170);
+   top:10px;
+}
+
+.container-fluid {
+ margin-left: 0%;
+}
+
+
+.validation_error{
+         font-size:13px;
+         color:rgb(247, 88, 76);
+}
+
+
+*{
+font-family: 'JeonjuCraftGoR';
+}
+
+
+.hide{
+ display: none;
+}
+
+.font{font-size:11px;
+}
+
+.custom-btn {
+  width: 375px;
+  height: 40px;
+  color: #fff;
+  border-radius: 5px;
+  padding: 10px 25px;
+  font-weight: 500;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+   box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
+   7px 7px 20px 0px rgba(0,0,0,.1),
+   4px 4px 5px 0px rgba(0,0,0,.1);
+  outline: none;
+}
+
+.btn-1 {
+  background: rgb(4, 18, 34);
+  background: linear-gradient(0deg, rgba(6,14,131,1) 0%, rgba(12,25,180,1) 100%);
+  border: none;
+}
+
+
+#card1:hover{
+transform: scale(1.2);
+transition: all 0.2s linear;
+}
+
+#card11:hover{
+transform: scale(1.2);
+transition: all 0.2s linear;
+}
+
+#card2:hover{
+transform: scale(1.2);
+transition: all 0.2s linear;
+}
+
+#card3:hover{
+transform: scale(1.2);
+transition: all 0.2s linear;
+}
+
+#card4:hover{
+transform: scale(1.2);
+transition: all 0.2s linear;
+}
+
+#card5:hover{
+transform: scale(1.2);
+transition: all 0.2s linear;
+}
+
+.gge{
+background-color:rgb(178, 214, 238);
+width:6rem;
+font-size:15px;
+color:rgb(37, 37, 37);
+font-family: 'Noto Sans KR', sans-serif;
+}
+
+.gge:hover{
+              transform: scale(1.2);
+              transition: all 0.2s linear;
+              }
+.gu:hover{
+background:rgb(253, 174, 174);
+              }
+
+.wwe{
+color:rgb(37, 37, 37);
+font-family: 'Noto Sans KR', sans-serif;
+}
+
+a{
+text-decoration: none;
+}
+
+.bus{
+border-bottom: 1px solid rgb(245, 242, 242);
+color:white;
+width:25rem;
+}
+
+.gu{
+text-decoration: none;
+background-color:white;
+width:3.5rem;
+height:3.5rem;
+font-size:15px;
+}
+
+@keyframes move-up {
+  from {
+    transform: translateY(25%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+#seo{
+  animation-name: move-up;
+  animation-duration: 2s;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+#yu{
+  animation-name: move-up;
+  animation-duration: 2s;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+#dong{
+  animation-name: move-up;
+  animation-duration: 2s;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+#jung{
+  animation-name: move-up;
+  animation-duration: 2s;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+#dae{
+  animation-name: move-up;
+  animation-duration: 2s;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+.gc{
+    background: linear-gradient(to right top, rgb(233, 160, 204), rgb(232, 240, 121));
+    color: transparent;
+    -webkit-background-clip: text;
+}
+
+.gc2{
+    background: linear-gradient(to right top, rgb(230, 183, 236), rgb(27, 204, 248));
+    color: transparent;
+    -webkit-background-clip: text;
+}
+
+.gc3{
+    background: linear-gradient(to right top, rgb(250, 197, 137), rgb(27, 204, 248));
+    color: transparent;
+    -webkit-background-clip: text;
+}
+
+.gc4{
+    background: linear-gradient(to right top, rgb(171, 226, 233), rgb(27, 204, 248));
+    color: transparent;
+    -webkit-background-clip: text;
+}
+
+.gc5{
+    background: linear-gradient(to right top,rgb(250, 248, 163), rgb(121, 240, 131));
+    color: transparent;
+    -webkit-background-clip: text;
+}
+
+#my_modal {
+    position: fixed;
+    display: none;
+    width: 1400px; /* Set your desired width */
+    height: 800px; /* Set your desired height */
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    z-index: 10000;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    ms-transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+}
+#chat_iframe {
+    width: 100%;
+    height: 100%;
+    border: none; /* Remove iframe border if needed */
+}
+
+#in1{
+color:rgb(110, 108, 108);
+              }
+#in1:hover{
+color:rgb(253, 174, 174);
+              }
+#in2{
+color:rgb(110, 108, 108);
+              }
+#in2:hover{
+color:rgb(253, 174, 174);
+}
+#in3{
+color:rgb(110, 108, 108);
+              }
+#in3:hover{
+color:rgb(253, 174, 174);
+            }
+#find{
+color:rgb(153, 153, 153);
+}
+
+#find:hover{
+color:rgb(36, 36, 36);
+            }
+#find2{
+color:rgb(153, 153, 153);
+}
+
+#find2:hover{
+color:rgb(36, 36, 36);
+            }
+#toLogin:hover{
+color:rgb(74, 102, 168);
+}이미지 누르면 크게 보기
+
+
+
+#study:hover{
+color:rgb(243, 138, 138);
+}
+
+
+#study2:hover{
+color:rgb(243, 138, 138);
+}
+
+#study3:hover{
+color:rgb(243, 138, 138);
+}
+
+#study4:hover{
+color:rgb(243, 138, 138);
+}
+
+#test1:hover{
+transform: scale(1.2);
+transition: all 0.2s linear;
+}
+
+#test2:hover{
+transform: scale(1.2);
+transition: all 0.2s linear;
+}

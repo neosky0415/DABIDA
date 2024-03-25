@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      rel="stylesheet" href="/css/test.css"
+      layout:decorate="~{layout/layout}">
+<head>
+    <!-- ... (other head elements) ... -->
+    <script src="path/to/customModal.js"></script>
+</head>
+<div layout:fragment="content">
+
+    <div class="d-flex justify-content-center">
+    <div class="mt-5 mb-5 card text-center" style="width: 50rem;">
+
+        <div class="card-header">
+            <b>※<span th:text="${testName}"></span> 시 험 성 적 표※</b>
+        </div>
+
+        <div class="card-body">
+            <h5 class="card-title mt-3 mb-3">시험 보시느라 수고 많으셨습니다 ^^♥</h5>
+
+            <div class="offset-4 input-group input-group-sm mt-5 mb-3" style="width: 30rem;">
+                <span class="input-group-text" style="width: 7rem;" > 시험날짜 </span>
+                <span class="input-group-text" th:text="${formatedNow}" style="width: 9rem;"></span>
+            </div>
+
+            <div class="offset-4 input-group input-group-sm  mb-3" style="width: 30rem;">
+                <span class="input-group-text" style="width: 7rem;"> 총 문항수</span>
+                <span class="input-group-text" th:text="${questionList}+'개'" style="width: 9rem;"></span>
+            </div>
+
+            <div class="offset-4 input-group input-group-sm mb-3" style="width: 30rem;">
+                <span class="input-group-text" style="width: 7rem;"> 정답 수</span>
+                <span class="input-group-text" th:text="${hitCount}+'개'" style="width: 9rem;"></span>
+            </div>
+
+            <div class="offset-4 input-group input-group-sm mb-3" style="width: 30rem;">
+                <span class="input-group-text" style="width: 7rem;"> 총&nbsp; 점</span>
+                <span class="input-group-text" th:text="${score1}+'점'" style="width: 9rem;"></span>
+            </div>
+    </div>
+
+        <div class="card-footer" style="font-size:15px; color:rgb(243, 171, 171);">
+            <b>대 전 학 원</b>
+        </div>
+</div>
+
+    </div>
+</div>

@@ -1,0 +1,129 @@
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      layout:decorate="~{manager/managerlayout}"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>등록반 확인</title>
+</head>
+
+<div layout:fragment="content">
+<div class="container">
+    <nav>
+        <div class="nav nav-tabs" id="nav-tab" role="tablist" style="width:70rem;">
+            <a href="#" class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" aria-controls="nav-home" role="tab"  aria-selected="true">Home</a>
+            <a href="#" class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" role="tab" aria-controls="nav-profile"  aria-selected="false">Profile</a>
+            <a href="user" class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" role="tab" aria-controls="nav-contact"  aria-selected="false">Contact</a>
+        </div>
+    </nav>
+
+        <h5 class="mt-5 p-1 border-bottom">
+            <span style="color:rgb(89, 155, 160);">[[${team.teamName}]]</span> 반
+        </h5>
+        <a th:href="@{/team_list}" class="btn btn btn-link btn-sm shadow-sm"
+           style="text-decoration:none;background-color: rgb(224, 224, 224);color:black;font-size:13px;">
+            전체반 목록<i class="bi bi-arrow-counterclockwise"></i>
+        </a>
+
+        <table class="table ms-3 mt-5" style="width:25rem;">
+            <tr class="table-warning">
+                <td style="font-size:13px;color:rgb(109, 109, 109); width:5rem;">순번</td>
+                <td style="font-size:13px;color:rgb(109, 109, 109); width:8rem;">학생명</td>
+                <td style="font-size:13px;color:rgb(109, 109, 109);">수강 등록일</td>
+                <td></td>
+            </tr>
+            <tr th:each="student, stat : ${byTeamName}">
+                <td style="font-size:13px;color:rgb(109, 109, 109);">[[${stat.count}]].</td>
+                <td style="font-size:13px;color:rgb(109, 109, 109);">[[${student.realName}]]</td>
+                <td style="font-size:13px;color:rgb(109, 109, 109);">
+                    [[${#dates.format(student.createdAt, 'yyyy.MM.dd')}]]
+                </td>
+                <td></td>
+            </tr>
+        </table>
+
+        <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">삭제</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <span>삭제하시겠습니까?</span>
+                        <input type="hidden" id="uuid">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취 소</button>
+                        <button type="button" class="btn btn-primary" id="deleteConfirm">삭 제</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="toast-container position-fixed bottom-0 end-0 p-3">
+            <div id="liveToast" class="toast" data-bs-delay="3000" role="alert" aria-live-="assertive" aria-atomic="true">
+                <div class="toast-header">
+                    <img src="..." class="rounded me-2" alt="...">
+                    <strong class="me-auto">항목 편집</strong>
+                    <small>3초 후 사라짐</small>
+                    <botton type="button" class="btn-close" data-bs-dimiss="toast" aria-label="close"></botton>
+                </div>
+                <div class="toast-body" id="toast_message">
+                    여기는 메세지 자리 아이디를 안주면 이 말이나온다
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<th:block layout:fragment="script-content">
+
+    <script  type="text/javascript" th:inline="javascript">
+
+
+        let modal = null;
+        let url = null;
+
+        function del_button_clicked(clicked_id) {
+            let delButton = document.getElementById(clicked_id);
+            let pk = delButton.dataset.pk;
+
+            document.getElementById('uuid').textContent = "「uuid "+pk+"」";
+            url = delButton.dataset.url;
+
+            let container = document.getElementById("deleteModal");
+            modal = new bootstrap.Modal(container);
+            modal.show();
+        }
+
+        document.getElementById("deleteConfirm").addEventListener("click", function (){
+            if (modal != null) {
+                modal.hide();
+                location.href = url;
+            }
+        });
+
+
+
+
+        var toast_message = [[${toast_message}]];
+
+        if (toast_message != null && toast_message !=="") {
+            document.getElementById('toast_message').textContent = toast_message;
+
+            var toast = document.getElementById('liveToast')
+            var bsToast = new bootstrap.Toast(toast);
+            bsToast.show();
+
+        }
+
+    </script>
+
+
+</th:block>

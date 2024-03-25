@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      layout:decorate="~{layout/layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>출제 list</title>
+</head>
+
+<div layout:fragment="content">
+    <div class="container">
+    <br></br>
+        <h4 class="border-bottom"> 나의 출제_LIST</h4>
+    <div class="row">
+        <div class=" offset-0">
+            <table class="table table-striped">
+                <tr>
+                    <td><strong></strong></td>
+                    <td><strong>시험 문제</strong></td>
+                    <td><strong>출제자</strong></td>
+                    <td><strong>수정 / 삭제</strong></td>
+                    <td><strong>작성 , 수정 일자</strong></td>
+                </tr>
+                <tr th:each="question, stat : ${questionList}">
+                    <td><strong>[[${stat.count}]].</strong></td>
+                    <td> <a style="text-decoration:none;" title="시험문제 보기"  th:href="@{/question_details/__${question.quuid}__}" >[[${question.title}]]</a></td>
+                    <td>[[${question.username}]]</td>
+
+
+
+                    <td>
+                        <a th:href="@{/question_edit/__${question.quuid}__}" class="btn btn-outline-primary btn-sm">
+                            <strong>update</strong>
+                        </a>
+                        <a th:href="@{|/question_delete/${question.quuid}|}" class="btn btn-outline-danger btn-sm"
+                           onclick="javascript:btn()">
+                            <strong>delete</strong>
+                        </a>
+                    </td>
+
+                    <td>
+                        <div th:if="${question.createdAt eq question.editedAt}">
+                            <div>[[${#dates.format(question.createdAt, 'yyyy.MM.dd')}]]</div>
+                        </div>
+                        <div th:unless="${question.createdAt eq question.editedAt}">
+                            <div>[[${#dates.format(question.createdAt, 'yyyy.MM.dd')}]]&nbsp;,&nbsp;</div>
+                            <div>[[${#dates.format(question.editedAt, 'yyyy.MM.dd HH:MM')}]]</div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+
+
+            <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+                <div id="liveToast" data-bs-delay="2000" class="toast hide" role="alert"
+                     aria-live="assertive" aria-atomic="true">
+                    <div class="toast-header">
+                        <div class="spinner-border text-info" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <strong class="me-auto">&nbsp; Question_bank</strong> <small> 2초 후 자동 사라짐..</small>
+                        <button type="button" class="btn-close" data-bs-dismiss="toast"
+                                aria-label="Close"></button>
+                    </div>
+                    <div class="toast-body" id="toast_message">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<th:block layout:fragment="script-content">
+    <script type="text/javascript" th:inline="javascript">
+        /*<![CDATA[*/
+		var toast_message = [[${toast_message}]];
+
+		if(toast_message != null && toast_message != "") {
+			document.getElementById('toast_message').textContent = toast_message;
+
+			var toast = document.getElementById('liveToast');
+			var bsToast = new bootstrap.Toast(toast);
+			bsToast.show();
+		}
+		/*]]>*/
+    </script>
+
+</th:block>
+
+
+</div>
+

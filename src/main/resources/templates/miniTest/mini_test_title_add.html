@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.2/css/bootstrap.min.css}"/>
+    <script src="webjars/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap-icons/1.11.1/font/bootstrap-icons.css}" />
+    <link rel="stylesheet" href="/css/test1.css">
+    <link rel="stylesheet" href="/js/test.js">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat&family=Edu+TAS+Beginner:wght@500&family=Gothic+A1&family=Nanum+Gothic+Coding&family=Noto+Sans+KR&family=Shadows+Into+Light&family=Sunflower:wght@300&family=The+Girl+Next+Door&display=swap" rel="stylesheet">
+
+    <link rel="icon" type="image/png" sizes="16x16"  href="images/favicon-16x16.png">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="theme-color" content="#ffffff">
+    <meta charset="UTF-8">
+    <title>시험 등록</title>
+</head>
+<body>
+
+<div class="container">
+    <div class="mt-4 border-bottom p-1" style="font-size:15px;">
+        <i class="bi bi-clipboard2-plus"></i> 시험지생성 <span style="font-size:11px;color:rgb(172, 171, 171);">(아래 내용을 빠짐없이 작성하시고 시험을 생성 해 주세요.)</span>
+    </div>
+
+    <form th:action="@{/mini_test_title_add}" th:object="${testNumberForm}" method="POST">
+
+        <div class="d-flex mb-3">
+            <label for="team"  style="font-size:12px;width:7rem;" class="form-label p-2 mt-3 me-2 border-end">시험제목 입력</label>
+                <input th:field="*{miniTitle}" th:value="${testNumberForm.miniTitle}" type="text" id="team" class="form-control form-control-sm mt-3" style="width:17rem;height:2rem;">
+                <div class="validation_error ms-1" th:if="${#fields.hasErrors('miniTitle')}" th:errors="*{miniTitle}" style="font-size:12px;"></div>
+        </div>
+
+        <div class="d-flex mb-3">
+            <label  for="miniDate"  style="font-size:12px;width:7rem;" class="col-form-label p-2 me-2 border-end">날짜</label>
+            <input th:field="*{miniDate}" type="date" id="miniDate" class="form-control form-control-sm" style="font-size:12px;color:rgb(90, 90, 90);width:17rem;height:2rem;"/>
+        </div>
+
+        <div class="d-flex mb-3">
+            <label  style="font-size:12px; width:7rem;" class="form-label p-2 me-2 border-end">시험과목</label>
+            <select style="font-size:12px;width:17rem;height:2rem;" onchange="test_subject_change();" id="test_subject" th:field="*{testSubject}" name="test_subject" class="form-select form-select-sm">
+                <option th:value="0" style="font-size:12px;color:rgb(90, 90, 90);">시험과목 선택</option>
+                <option th:each="subject : ${subjectList}"
+                        th:value="${subject.subject}"
+                        th:text="${subject.subject}">
+                </option>
+            </select>
+        </div>
+
+            <div class="d-flex mb-3">
+                <label  style="font-size:12px; width:7rem;" class="form-label p-2 me-2 border-end">출제반 지정</label>
+                <select style="font-size:12px;width:17rem;height:2rem;" onchange="test_subject_change();" id="test_team" th:field="*{teamName}" name="test_team" class="form-select form-select-sm">
+                    <option th:each="team : ${teamList}"
+                            th:value="${team.teamName}"
+                            th:text="${team.teamName}">
+                    </option>
+                </select>
+            </div>
+                <div class="d-flex justify-content-center">
+                    <button type="submit" class="btn btn-link btn-sm me-2 mt-3" style="text-decoration: none;color:white;background-color:rgb(229, 132, 154);">
+                        생 성
+                    </button>
+                    <button type="button" class="btn btn-link btn-sm mt-3" onclick="window.close();window.opener.location.reload();" style="text-decoration: none;color:white;background-color:rgb(159, 159, 159); ">
+                        닫 기
+                    </button>
+                </div>
+
+    </form>
+
+
+</div>
+</body>
+</html>

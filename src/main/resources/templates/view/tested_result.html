@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}">
+<head>
+    <title>시험지</title>
+</head>
+
+<div layout:fragment="content">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/"><i class="bi bi-house-door"></i></a></li>
+        </ol>
+    </nav>
+
+    <th:block th:each="tested, stat : ${testedList}">
+        <div class="row my-3">
+            <div class="col-8 offset-1">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="col-8">
+                            [[${stat.count}]].&nbsp;[[${tested.title}]]
+                        </div>
+                        <div class="row">
+                            <div class="col-8" th:with="aName='a_' + ${stat.count}, aNo1='answer_' + ${stat.count} +'1', aNo2='answer_' + ${stat.count} +'2', aNo3='answer_' + ${stat.count} +'3', aNo4='answer_' + ${stat.count} +'4'">
+
+                            <input type="radio" th:id="${aNo1}" th:name="${aName}" th:checked="${tested.answer eq 1}" value="1"/>
+                            <label th:for="${aNo1}" th:text="'①' + ${tested.choice1}"></label>
+                            <br>
+
+                            <input type="radio" th:id="${aNo2}" th:name="${aName}" th:checked="${tested.answer eq 2}" value="2"/>
+                            <label th:for="${aNo2}" th:text="'②' + ${tested.choice2}"></label>
+                            <br>
+                            <input type="radio" th:id="${aNo3}" th:name="${aName}" th:checked="${tested.answer eq 3}" value="3"/>
+                            <label th:for="${aNo3}" th:text="'③' + ${tested.choice3}"></label>
+                            <br>
+                            <input type="radio" th:id="${aNo4}" th:name="${aName}" th:checked="${tested.answer eq 4}" value="4"/>
+                            <label th:for="${aNo4}" th:text="'④' + ${tested.choice4}"></label>
+                            <br>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </th:block>
+</div>
+

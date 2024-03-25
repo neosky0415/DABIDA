@@ -1,0 +1,66 @@
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      layout:decorate="~{manager/managerlayout}"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>manager page</title>
+</head>
+
+<div layout:fragment="content">
+
+    <div class="d-flex flex-column mb-3">
+
+        <div class="shadow p-3 mb-3" style="background-color: rgb(216, 238, 241);">
+            <div>관리자 페이지에 오신걸 환영합니다 <i class="bi bi-emoji-smile"></i></div>
+            <hr>
+            <div class="d-flex flex-row">
+                <div href="#" class="me-3" style="font-size:12px;">답변대기 문의<span style="color:red;"> 1</span></div>
+                <div href="#" class="me-3" style="font-size:12px;">출제대기<span style="color:red;"> 2</span></div>
+            </div>
+        </div>
+
+        <div class="d-flex flex-row">
+            <div class="p-2 flex-grow-1">
+                <div class="shadow border" >
+                    <div class="p-2" >안녕</div>
+                </div>
+            </div>
+            <div class="shadow p-3 me-3 mb-3 bg-body-tertiary" style="width:35rem;height:35rem;font-size:13px;">
+                <div class="d-flex justify-content-center">
+                    <div style="font-size:15px;">학원 주요일정</div>
+                </div>
+                <hr>
+                <div>
+                    <div id='calendar'></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row g-0 bg-body-secondary position-relative">
+            <div class="col-md-3 mb-md-0 p-md-4">
+                <img src="images/nn.png" class="w-100"  alt="...">
+            </div>
+            <div class="col-md-9 p-4 ps-md-0">
+                <h5 class="mt-0">Columns with stretched link</h5>
+                <p>Another instance of placeholder content for this other custom component. It is intended to mimic what some real-world content would look like, and we're using it here to give the component a bit of body and size.</p>
+                <a href="#" class="stretched-link">Go somewhere</a>
+            </div>
+        </div>
+
+
+    </div>
+
+</div>
+
+
+
+
+
+
+
+<th:block layout:fragment="script-content">
+
+</th:block>

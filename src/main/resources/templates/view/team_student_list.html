@@ -1,0 +1,95 @@
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      layout:decorate="~{manager/managerlayout}"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>등록반</title>
+</head>
+
+<div layout:fragment="content">
+<div class="container">
+
+        <h5 class="mt-5 p-1 border-bottom">
+            <span style="color:rgb(89, 155, 160);">[[${team.teamName}]]</span> <span style="font-size:14px;">학생들의 정보입니다.</span>
+        </h5>
+        <a th:href="@{/studentManage/team_list}" class="btn btn btn-link btn-sm shadow-sm mb-5"
+           style="text-decoration:none;color:rgb(71, 71, 71);;font-size:13px;background-color:rgb(246, 247, 244);">
+            <i class="bi bi-arrow-bar-left"></i> 전체반 목록
+        </a>
+
+    <div class="ms-3 mt-3" style="font-size:12px;color:rgb(112, 112, 112);">원하는 과목을 선택하여 성적을 확인해주세요.(1개 선택시에도 조회가능)</div>
+        <table class="table ms-3 mt-1" style="width:60rem;">
+            <tr class="table-success" style="color:rgb(71, 71, 71);">
+                <td style="font-size:13px; width:5rem;">순번</td>
+                <td style="font-size:13px; width:8rem;">학생명</td>
+                <td style="font-size:13px; width:8rem;">수강 등록일</td>
+                <td style="font-size:13px; width:8rem;">
+                    <div class="ms-3">과목1</div>
+                </td>
+                <td style="font-size:13px; width:8rem;">
+                    <div class="ms-3">과목2</div>
+                </td>
+                <td style="font-size:13px; width:8rem;">
+                    <div class="ms-3">과목3</div>
+                </td>
+                <td></td>
+            </tr>
+            <tr th:each="student, stat : ${byTeamName}">
+                <form th:action="@{/studentManage_info/{name}(name=${student.username})}"  method="post" class="d-flex">
+
+                <td style="font-size:13px;color:rgb(109, 109, 109);">
+                    <div class="mt-2">[[${stat.count}]].</div>
+                </td>
+                <td style="font-size:13px;color:rgb(109, 109, 109);">
+                    <div class="mt-2">[[${student.realName}]]</div>
+                </td>
+                <td style="font-size:13px;color:rgb(109, 109, 109);">
+                    <div class="mt-2">[[${#dates.format(student.createdAt, 'yyyy.MM.dd')}]]</div>
+                </td>
+
+               <td>
+                 <select style="width:6rem;font-size:13px;color:rgb(90, 90, 90);" id="test_subject1" th:field="${dataChartsForm.subject1}" name="test_subject" class="form-select form-select-sm">
+                   <option th:value= null style="font-size:12px;">과목선택</option>
+                   <option th:each="subject : ${subjectList}"
+                           th:value="${subject.subject}"
+                           th:text="${subject.subject}">
+                   </option>
+                 </select>
+               </td>
+
+                <td>
+                  <select style="width:6rem;font-size:13px;color:rgb(90, 90, 90);"  id="test_subject2" th:field="${dataChartsForm.subject2}" name="test_subject" class="form-select form-select-sm">
+                    <option th:value= null style="font-size:12px;">과목선택</option>
+                    <option th:each="subject : ${subjectList}"
+                            th:value="${subject.subject}"
+                            th:text="${subject.subject}">
+                    </option>
+                  </select>
+                </td>
+
+                <td>
+                  <select  style="width:6rem;font-size:13px;color:rgb(90, 90, 90);"  id="test_subject3" th:field="${dataChartsForm.subject3}" name="test_subject" class="form-select form-select-sm">
+                    <option th:value= null style="font-size:12px;">과목선택</option>
+                    <option th:each="subject : ${subjectList}"
+                            th:value="${subject.subject}"
+                            th:text="${subject.subject}">
+                    </option>
+                  </select>
+                </td>
+
+                <td style="width:6rem;">
+                    <button type="submit" class="btn btn-link" style="text-decoration: none;color:white;background-color:rgb(166, 218, 175);font-size:12px;">성적확인</button>
+                </td>
+                </form>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<th:block layout:fragment="script-content">
+
+
+</th:block>

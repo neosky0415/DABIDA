@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      layout:decorate="~{layout/layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>소개 글</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat&family=Edu+TAS+Beginner:wght@500&family=Shadows+Into+Light&family=Sunflower:wght@300&family=The+Girl+Next+Door&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat&family=Edu+TAS+Beginner:wght@500&family=Noto+Sans+KR&family=Shadows+Into+Light&family=Sunflower:wght@300&family=The+Girl+Next+Door&display=swap" rel="stylesheet">
+
+</head>
+
+<div layout:fragment="content">
+
+    <div class="offset-1 d-flex flex-row mt-3 mb-3" style="font-size:14px;">
+        <a href="/introduce" class="border-end me-2"><div class="p-2" id="in1"><b><span style="color:rgb(253, 174, 174);">우리 학원은?</span></b></div></a>
+        <a href="/recruitment" class="border-end me-2"><div class="p-2" id="in2"><b>모집안내</b></div></a>
+        <a href="/curriculum" class="border-end"><div class="p-2" id="in3"><b>교육과정</b></div></a>
+    </div>
+    <br>
+
+    <div class="d-flex justify-content-center">
+        <div class="d-flex position-relative mt-5" style="width:60rem;">
+            <img th:src="@{/images/ex.png}" class="flex-shrink-0 me-5" alt="노트사진" style="width:10rem;height:8rem;">
+            <div>
+                <h5 class="mt-0">기본 개념부터 선행 및 심화까지 완벽하게, </h5>
+                <p style="font-size:13px; color:rgb(88, 88, 88);">
+                    초,중,고 교과 과정은 모든 시험이 학생 생활 기록부에 기재되기 때문에<br>
+                    그 어느 때보다도 내신이 매우 중요 합니다.<br>
+                    완벽한 내신 대비를 위해서 체계적인 심화도 함께 진행되어야 합니다.<br>
+                    따라서 기본개념에서 심화까지 유기적으로 진행되는 것이 중요합니다.<br>
+                    <br>
+                    저희 학원에서는 모든 학년의 진도를 수준별로 세분화하여 진행함으로써 '<span style="color:red;">완벽한 내신 대비</span>' 가 이루어 지고 있습니다.<br> </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="offset-1 d-flex flex-row mt-3 mb-3" style="width:90rem;">
+
+        <div class="border rounded-2 me-3 p-2" style="width:30rem;">
+            <span class="p-1 mb-3" style="background-color:rgb(243, 118, 145);font-family: 'Noto Sans KR', sans-serif; color:white; font-size:14px;"><b>자 사 고 반</b></span><br>
+            <span class="mt-2" style="font-size:13px;">
+                * 고난이도 심화문제로 사고력 향상 및 문제 해결력을 길러 자사고 시험대비.<br>
+                * 자사고 입학시 적응하기에 알맞는 진도를 통해 문제 해결력을 향상시킴.<br>
+                * 다양한 커리큘럼으로 학생들의 호기심을 유발하여 경시문제 풀이진행.<br></span>
+        </div>
+
+        <div class="border rounded-2 me-3 p-2" style="width:30rem;">
+            <span class="p-1 mb-3" style="background-color:rgb(243, 118, 145);font-family: 'Noto Sans KR', sans-serif; color:white;font-size:14px;"><b>심 화 반</b></span><br>
+            <span class="mt-2" style="font-size:13px;">
+                * 빠른 학습과 심화과정을 통해 고난이도 문제풀이와 창의사고력 강화.<br>
+                * 문제를 통한 사고력,응용력을 요구하는 응용 문제까지 유형별로 분류해 지도.<br>
+                * 내신 대비를 위한 다양한 유형의 문제풀이와 서술형 문제풀이 요령지도.<br></span>
+        </div>
+
+        <div class="border rounded-2 me-3 p-2" style="width:30rem;" >
+            <span class="p-1 mb-3" style="background-color:rgb(243, 118, 145);font-family: 'Noto Sans KR', sans-serif; color:white;font-size:14px;"><b>정 규 반</b></span><br>
+            <span class="mt-2" style="font-size:13px;">
+                * 진도교재 복습부교재 창의 서술형 문제를 통해 복습과 선행을 병행<br>
+                * 일일평가 및 단원평가,월말평가,모의고사<br>
+                * 시험기간중 기출문제 풀이등 철저한 내신관리<br></span>
+        </div>
+    </div>
+
+    <div class="text-center mt-3" style="font-size:35px; font-family: 'Shadows Into Light', cursive; color:rgb(56, 56, 56);">
+        "Well begun is half done."<br>
+        <span style="font-size:27px; font-family: 'Shadows Into Light', cursive; color:rgb(56, 56, 56);">-Aristotle-</span>
+    </div>
+
+    <div class="mt-5 p-3" style="background-color:rgb(66, 66, 66);">
+
+        <div class="text-center mb-3" style="font-size:30px;font-family: 'Noto Sans KR', sans-serif; color:white;"> 입시 성공의 KEY, 스터디 학원  </div>
+        <div class="text-center mb-3" style="font-size:14px;font-family: 'Noto Sans KR', sans-serif; color:white;">
+            이미 수많은 졸업생들 수로 증명된 입시 명문<br>
+            우리 스터디 학원만이 가능한 학습 시스템을 경험 하세요.
+        </div>
+
+        <div>
+            <div>
+                <div class="d-flex flex-row">
+                    <div class="offset-1" style="border-bottom:2px dotted white;width:35rem;">
+                        <div class="d-flex flex-row mb-3">
+                            <div class="p-2 ms-3 me-5" style="font-family: 'Noto Sans KR', sans-serif;color:white; font-size:17px;"><i class="bi bi-snow2"></i> 겨 울 특 강</div>
+                            <a href="#"><div class="p-2 me-3 text-center rounded-pill gge">국 어</div></a>
+                            <a href="#"><div class="p-2 me-3 text-center rounded-pill gge">수 학</div></a>
+                            <a href="#"><div class="p-2 me-3 text-center rounded-pill gge">영 어</div></a>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="offset-1 d-flex flex-row mt-3 mb-3">
+                    <div class="p-2 ms-3 me-5" style="font-family: 'Noto Sans KR', sans-serif;color:white; font-size:17px;"><i class="bi bi-bus-front"></i> 통 합 버 스</div>
+                    <button type="button" class="btn btn-link text-center rounded-circle me-3 gu" ><div id="1" onclick="show(this.id)" class="wwe">서구</div></button>
+                    <button type="button" class="btn btn-link text-center rounded-circle me-3 gu" ><div id="2" onclick="show(this.id)" class="wwe">유성</div></button>
+                    <button type="button" class="btn btn-link text-center rounded-circle me-3 gu" ><div id="3" onclick="show(this.id)" class="wwe">동구</div></button>
+                    <button type="button" class="btn btn-link text-center rounded-circle me-3 gu" ><div id="4" onclick="show(this.id)" class="wwe">중구</div></button>
+                    <button type="button" class="btn btn-link text-center rounded-circle me-3 gu" ><div id="5" onclick="show(this.id)" class="wwe">대덕</div></button>
+
+                    <div id="seo">
+                        <div class="offset-4 gc">
+                            <div style="font-family: 'Noto Sans KR', sans-serif;font-size:30px;">
+                                <b>서 구</b>
+                            </div>
+                            <span style="font-family: 'Noto Sans KR', sans-serif; font-size:20px;" >통 합 Bus</span>
+                        </div>
+                        <div class="d-flex flex-column mt-3 mb-3 offset-5" style="font-size:14px;">
+                            <div class="p-2 bus">am. 09:00&nbsp;&nbsp;&nbsp; 둔산동 <i class="bi bi-arrow-right-short"></i> 둔산2동 <i class="bi bi-arrow-right-short"></i> 갈마동</div>
+                            <div class="p-2 bus">pm. 14:00&nbsp;&nbsp;&nbsp; 월평동 <i class="bi bi-arrow-right-short"></i> 탄방동 <i class="bi bi-arrow-right-short"></i> 둔산3동</div>
+                            <div class="p-2 bus">pm. 18:00&nbsp;&nbsp;&nbsp; 관저동 <i class="bi bi-arrow-right-short"></i> 가수원동 <i class="bi bi-arrow-right-short"></i> 정림동</div>
+                        </div>
+                    </div>
+
+                    <div id="yu" style="display:none;">
+                        <div class="offset-4 gc2">
+                            <div style="font-family: 'Noto Sans KR', sans-serif;font-size:30px;">
+                                <b>유 성</b>
+                            </div>
+                            <span style="font-family: 'Noto Sans KR', sans-serif; font-size:20px;" >통 합 Bus</span>
+                        </div>
+                        <div class="d-flex flex-column mt-3 mb-3 offset-5" style="font-size:14px;">
+                            <div class="p-2 bus">am. 09:00&nbsp;&nbsp;&nbsp; 봉명동 <i class="bi bi-arrow-right-short"></i> 장대동 <i class="bi bi-arrow-right-short"></i> 죽동</div>
+                            <div class="p-2 bus">pm. 14:00&nbsp;&nbsp;&nbsp; 구암동 <i class="bi bi-arrow-right-short"></i> 덕명동 <i class="bi bi-arrow-right-short"></i> 복용동</div>
+                            <div class="p-2 bus">pm. 18:00&nbsp;&nbsp;&nbsp; 노은1동 <i class="bi bi-arrow-right-short"></i> 지족동 <i class="bi bi-arrow-right-short"></i> 반석동</div>
+                        </div>
+                    </div>
+
+                    <div id="dong" style="display:none;">
+                        <div class="offset-4 gc3">
+                            <div style="font-family: 'Noto Sans KR', sans-serif; font-size:30px;">
+                                <b>동 구</b>
+                            </div>
+                            <span style="font-family: 'Noto Sans KR', sans-serif; font-size:20px;" >통 합 Bus</span>
+                        </div>
+                        <div class="d-flex flex-column mt-3 mb-3 offset-5" style="font-size:14px;">
+                            <div class="p-2 bus">AM. 09:00&nbsp;&nbsp;&nbsp; 판암동 <i class="bi bi-arrow-right-short"></i> 대동 <i class="bi bi-arrow-right-short"></i> 성남동</div>
+                            <div class="p-2 bus">pm. 14:00&nbsp;&nbsp;&nbsp; 용운동 <i class="bi bi-arrow-right-short"></i> 자양동 <i class="bi bi-arrow-right-short"></i> 가양동</div>
+                            <div class="p-2 bus">pm. 18:00&nbsp;&nbsp;&nbsp; 오동 <i class="bi bi-arrow-right-short"></i> 신상동 <i class="bi bi-arrow-right-short"></i> 신흥동</div>
+                        </div>
+                    </div>
+
+                    <div id="jung" style="display:none;">
+                        <div class="offset-4 gc4">
+                            <div style="font-family: 'Noto Sans KR', sans-serif;font-size:30px;">
+                                <b>중 구</b>
+                            </div>
+                            <span style="font-family: 'Noto Sans KR', sans-serif;font-size:20px;" >통 합 Bus</span>
+                        </div>
+                        <div class="d-flex flex-column mt-3 mb-3 offset-5" style="font-size:14px;">
+                            <div class="p-2 bus">am. 09:00&nbsp;&nbsp;&nbsp; 은행동 <i class="bi bi-arrow-right-short"></i> 선화동 <i class="bi bi-arrow-right-short"></i> 목동</div>
+                            <div class="p-2 bus">pm. 14:00&nbsp;&nbsp;&nbsp; 대흥동 <i class="bi bi-arrow-right-short"></i> 문창동 <i class="bi bi-arrow-right-short"></i> 석교동</div>
+                            <div class="p-2 bus">pm. 18:00&nbsp;&nbsp;&nbsp; 유천동 <i class="bi bi-arrow-right-short"></i> 오류동 <i class="bi bi-arrow-right-short"></i> 문화동</div>
+                        </div>
+                    </div>
+
+                    <div id="dae" style="display:none;">
+                        <div class="offset-4 gc5">
+                            <div style="font-family: 'Noto Sans KR', sans-serif; font-size:30px;">
+                                <b>대 덕</b>
+                            </div>
+                            <span style="font-family: 'Noto Sans KR', sans-serif;font-size:20px;" >통 합 Bus</span>
+                        </div>
+                        <div class="d-flex flex-column mt-3 mb-3 offset-5" style="font-size:14px;">
+                            <div class="p-2 bus">am. 09:00&nbsp;&nbsp;&nbsp; 오정동 <i class="bi bi-arrow-right-short"></i> 대화동 <i class="bi bi-arrow-right-short"></i> 읍내동</div>
+                            <div class="p-2 bus">pm. 14:00&nbsp;&nbsp;&nbsp; 송촌동 <i class="bi bi-arrow-right-short"></i> 법동 <i class="bi bi-arrow-right-short"></i> 중리동</div>
+                            <div class="p-2 bus">pm. 18:00&nbsp;&nbsp;&nbsp; 비래동 <i class="bi bi-arrow-right-short"></i> 덕암동 <i class="bi bi-arrow-right-short"></i> 신탄진동</div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+        <br>
+        <br>
+    </div>
+
+    <div class="text-center mt-5" style="font-family: 'Noto Sans KR', sans-serif; font-size:15px;color:rgb(56, 56, 56);">
+        <div class="mb-3"><i class="bi bi-signpost-split"></i> 오시는 길</div>
+        <div class="d-flex justify-content-center">
+            <div class="mobile_map">
+                <!-- * 카카오맵 - 지도퍼가기 -->
+                <!-- 1. 지도 노드 -->
+                <div id="daumRoughmapContainer1700016757182" class="root_daum_roughmap root_daum_roughmap_landing"></div>
+
+                <!--
+                    2. 설치 스크립트
+                    * 지도 퍼가기 서비스를 2개 이상 넣을 경우, 설치 스크립트는 하나만 삽입합니다.
+                -->
+                <script charset="UTF-8" class="daum_roughmap_loader_script" src="https://ssl.daumcdn.net/dmaps/map_js_init/roughmapLoader.js"></script>
+
+                <!-- 3. 실행 스크립트 -->
+                <script charset="UTF-8">
+                    new daum.roughmap.Lander({
+                        "timestamp" : "1700016757182",
+                        "key" : "2gtn5",
+                        "mapWidth" : "640",
+                        "mapHeight" : "360"
+                    }).render();
+                </script>
+            </div>
+        </div>
+    </div>
+
+
+
+    <br>
+    <br>
+</div>
+
+
+<th:block layout:fragment="script-content">
+
+    <script>
+        function show(id) {
+            var s = document.getElementById("seo");
+            var y = document.getElementById("yu");
+            var d = document.getElementById("dong");
+            var j = document.getElementById("jung");
+            var dd = document.getElementById("dae");
+
+            if (id === '1') {
+                s.style.display = 'block';
+                y.style.display = 'none';
+                d.style.display = 'none';
+                j.style.display = 'none';
+                dd.style.display = 'none';
+            } else if(id === '2') {
+                y.style.display = 'block';
+                s.style.display = 'none';
+                d.style.display = 'none';
+                j.style.display = 'none';
+                dd.style.display = 'none';
+            }else if(id === '3') {
+                d.style.display = 'block';
+                s.style.display = 'none';
+                y.style.display = 'none';
+                j.style.display = 'none';
+                dd.style.display = 'none';
+            }else if(id === '4') {
+                j.style.display = 'block';
+                s.style.display = 'none';
+                y.style.display = 'none';
+                d.style.display = 'none';
+                dd.style.display = 'none';
+            }else if(id === '5') {
+                dd.style.display = 'block';
+                s.style.display = 'none';
+                y.style.display = 'none';
+                j.style.display = 'none';
+                d.style.display = 'none';
+            }
+
+
+        }
+    </script>
+
+</th:block>

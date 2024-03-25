@@ -1,0 +1,20 @@
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title layout:title-pattern="$CONTENT_TITLE | $LAYOUT_TITLE">passwill</title>
+    <th:block th:replace="~{manager/managerconfig :: managerconfig}" />
+</head>
+<body>
+<th:block th:replace="~{manager/headers :: header}"/>
+<div class="container-fluid d-flex min-vh-100">
+    <th:block th:replace="~{manager/sidebar :: sidebar}"/>
+    <div layout:fragment="content" class="d-inline-flex p-2"></div>
+</div>
+
+<th:block layout:fragment="script-content"></th:block>
+
+</body>
+</html>

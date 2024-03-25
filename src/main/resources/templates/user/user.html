@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      layout:decorate="~{layout/layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>회원 가입</title>
+
+
+</head>
+
+<div layout:fragment="content">
+
+
+    <br>
+    <br>
+    <div class="d-flex flex-column offset-3">
+
+        <span class="offset-3 mt-5">| R E G I S T E R |</span>
+        <div class="offset-3"  style="font-size:12px;"><span style="color:dodgerblue; font-size:12px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>*</b></span> 필수 입력 사항</div>
+
+        <form th:action="@{/user_add}" th:object="${userForm}" method="post" enctype="multipart/form-data" onsubmit="return check();">
+
+            <div class="d-flex mt-5 mb-3" style="border-bottom: 0.5px solid rgb(207, 207, 207); width:50rem;">
+                <label style="font-size:12px; width:7rem;" class="form-label p-2 me-2 border-end">회원구분<b style="color:dodgerblue;">*</b></label>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" th:field="*{roles}" value="ROLE_USER" name="user" id="user" onclick="show(this.value)" checked="checked">
+                    <label class="form-check-label p-1" for="user" style="font-size:12px;">
+                        학생
+                    </label>
+                </div>
+                <div class="form-check ms-2">
+                    <input class="form-check-input" type="radio" th:field="*{roles}" value="ROLE_ADMIN"  name="admin" onclick="show(this.value)" id="admin" >
+                    <label class="form-check-label p-1" for="admin" style="font-size:12px;">
+                        교직원
+                    </label>
+                </div>
+            </div>
+
+            <div class="d-flex mt-3 mb-3" id="mail_input" name="mail_input">
+                <label for="username" style="font-size:12px;width:7rem;" class="form-label p-2 me-2 border-end">아이디<b style="color:dodgerblue;">*</b></label>
+                <input type="email" onblur="userNameCheck();" th:field="*{username}" style="width:17rem;height:2rem;" class="form-control form-control-sm" id="username" aria-describedby="emailHelp">
+                <div type="text" class="form-text; font-size:small; p-2 ms-1" style="color:rgb(189, 192, 194);font-size: 12px;">(이메일 입력. 영문소문자/숫자, 4~16자)</div>
+                <button style="width:5.5rem;height:2rem; font-size:11px;" type="button"
+                        id="sendBtn" name="sendBtn" class="ms-1 btn btn-outline-secondary btn-sm"  onclick="sendNumber()">
+                    인증번호발송
+                </button>
+                <div class="p-2" id="username1" style="font-size:14px;" type="text"></div>
+                <div class="validation_error" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
+            </div>
+
+            <div id="mail_number" name="mail_number" style="display:none">
+                <div class="d-flex mb-3">
+                    <label for="number" style="font-size:12px;width:7rem;" class="form-label p-2 me-2 border-end">이메일 인증<b style="color:dodgerblue;">*</b></label>
+                    <input type="text" style="width:17rem;height:2rem;font-size:12px;" name="number" id="number" class="form-control form-control-sm"  placeholder="인증번호를 입력 해주세요.">
+                    <button type="button" style="width:5.5rem;height:2rem; font-size:11px;" name="confirmBtn" id="confirmBtn" class=" ms-1 btn form-control btn-outline-secondary" onclick="return confirmNumber()">인 증 확 인</button>
+                    <input type="text" id="Confirm" name="Confirm" style="display: none" value="">
+                </div>
+            </div>
+
+
+
+            <div class="d-flex mb-3">
+                <label for="password" style="font-size:12px;width:7rem;" class="form-label p-2 me-2 border-end">비밀번호<b style="color:dodgerblue;">*</b></label>
+                <input type="password" th:field="*{password}" class="form-control form-control-sm me-1" style="width:17rem;height:2rem;" id="password" aria-describedby="passwordlHelp">
+                <div id="passwordlHelp" class="form-text; font-size:small; p-2" style="color:rgb(189, 192, 194); font-size:12px;">(영문 대소문자/숫자/특수문자 중 2가지 이상 조합, 8자~16자)</div>
+                <div class="validation_error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+            </div>
+
+            <div class="d-flex mb-3">
+                <label for="password2" style="font-size:12px; width:7rem;" class="form-label p-2 me-2 border-end">비밀번호 확인<b style="color:dodgerblue;">*</b></label>
+                <input type="password" class="form-control form-control-sm" name="password2" id="password2" style="width:17rem;height:2rem;"  onblur="confirm();" aria-describedby="passwordlHelp" >
+                <div id="passwordHelp" class="form-text p-1" style="color:red;"></div>
+                <div class="validation_error" th:if="${#fields.hasErrors('password2')}" th:errors="*{password2}"></div>
+            </div>
+
+
+            <div id="tnumber">
+            <div class="d-flex mb-3">
+               <label for="teacherCode" style="font-size:12px; width:7rem;" class="form-label p-2 me-2 border-end">선생님 코드<b style="color:dodgerblue;">*</b></label>
+                <input type="text"  th:field="*{teacherCode}" style="width:17rem;height:2rem;" class="form-control form-control-sm" id="teacherCode"  onfocusout="teacherCheck();">
+                <div class="p-2" id="teacherCode1" style="font-size:14px;" type="text"></div>
+            </div>
+
+            </div>
+
+
+
+            <div class="d-flex mb-3">
+                <label for="Inputname" style="font-size:12px; width:7rem;" class="form-label p-2 me-2 border-end">이름<b style="color:dodgerblue;">*</b></label>
+                <input type="text"  th:field="*{realName}" class="form-control form-control-sm" name="name" style="width:17rem;height:2rem;" id="Inputname">
+                <div id="nameMessage" class="form-text; font-size:small; p-2" style="color:rgb(189, 192, 194); font-size:12px;">(알맞은 이름을 입력하십시오)</div>
+
+                <!--                <div class="failMessage hide font">이름을 입력해 주세요.</div>-->
+
+                <!--                <div class="validation_error ms-1 pt-2" th:if="${#fields.hasErrors('realName')}" th:errors="*{realName}"></div>-->
+            </div>
+
+
+
+
+                <div class="d-flex mb-3">
+                    <label style="font-size:12px; width:7rem;" class="form-label p-2 me-2 border-end">프로필 사진<b style="color:dodgerblue;">*</b></label>
+                    <input type="file" class="form-control form-control-sm" style="width:17rem;height:2rem; font-size:13px;" name="userFile" accept="image/png, image/jpeg" />
+                </div>
+
+
+            <div class="d-flex mb-3">
+                <label for="mobile" style="font-size:12px; width:7rem;" class="form-label p-2 me-2 border-end">휴대전화<b style="color:dodgerblue;">*</b></label>
+                <input type="text" class="form-control" th:field="*{phoneNum}" style="width:17rem;height:2rem;" id="mobile"   name="mobile">
+                <div class="nullMessage hide font">*휴대전화를 번호를 입력해 주세요.</div>
+                <div class="failMessage hide font ms-1 pt-2">(-)없이 숫자만 입력해주세요. ex)01012345678</div>
+                <!--                <div class="validation_error ms-1 pt-2" th:if="${#fields.hasErrors('phoneNum')}" th:errors="*{phoneNum}"></div>-->
+            </div>
+
+            <div id="stumobile">
+                <div class="d-flex mb-3">
+                    <label for="mobile2" style="font-size:12px; width:7rem;" class="form-label p-2 me-2 border-end">부모님 전화<b style="color:dodgerblue;">*</b></label>
+                    <input type="text" class="form-control" th:field="*{guardianNum}" style="width:17rem;height:2rem;" id="mobile2" name="mobile2">
+                    <div class="validation_error ms-1 pt-2" th:if="${#fields.hasErrors('guardianNum')}" th:errors="*{guardianNum}"></div>
+                    <div class="nullMessage1 hide font">*휴대전화를 번호를 입력해 주세요.</div>
+                    <div class="failMessage1 hide font ms-1 pt-2">(-)없이 숫자만 입력해주세요. ex)01012345678</div>
+                </div>
+            </div>
+
+
+
+
+
+            <div id="stuteam">
+                <div class="d-flex mb-3">
+                    <label  style="font-size:12px; width:7rem;" class="form-label p-2 me-2 border-end">배정 반<b style="color:dodgerblue;">*</b></label>
+                    <select style="font-size:12px;width:17rem;height:2rem;" onchange="test_subject_change();" id="test_team" th:field="*{teamName}" name="test_team" class="form-select form-select-sm">
+                        <option th:value="0" style="font-size:12px;color:rgb(90, 90, 90);">반 선택</option>
+                        <option th:each="team : ${teamList}"
+                                th:value="${team.teamName}"
+                                th:text="${team.teamName}">
+                        </option>
+                    </select>
+                </div>
+            </div>
+
+            <div id="teasub" style="display: none;">
+                <div class="d-flex mb-3">
+                    <label  style="font-size:12px; width:7rem;" class="form-label p-2 me-2 border-end">담당과목<b style="color:dodgerblue;">*</b></label>
+                    <select style="font-size:12px;width:17rem;height:2rem;" onchange="test_subject_change();" id="test_subject" th:field="*{subject}" name="test_subject" class="form-select form-select-sm">
+                        <option th:value="0" style="font-size:12px;color:rgb(90, 90, 90);">담당과목 선택</option>
+                        <option th:each="subject : ${subjectList}"
+                                th:value="${subject.subject}"
+                                th:text="${subject.subject}">
+                        </option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="d-flex mb-3" style="font-size:12px;"><b>[필수]개인정보 수집 및 이용동의</b></div>
+            <div class="card d-flex mb-3" style="width:50rem;">
+                <div class="card-body overflow-auto" style="color: rgb(87, 88, 88); font-size:11px; height:200px;">
+                    ■ 수집하는 개인정보 항목<br>
+                    회사는 회원가입, 상담, 서비스 신청 등등을 위해 아래와 같은 개인정보를 수집하고 있습니다.<br>
+                    ο 수집항목 : 이름 , 생년월일 , 성별 , 로그인ID , 비밀번호 , 비밀번호 질문과 답변 , 자택 전화번호 , 자택 주소 , 휴대전화번호 , 이메일 , 직업 , 회사명 , 부서 , 직책 , 회사전화번호 , 취미 , 결혼여부 , 기념일 , 법정대리인정보 , 서비스 이용기록 , 접속 로그 , 접속 IP 정보 , 결제기록<br>
+                    ο 개인정보 수집방법 : 홈페이지(회원가입) , 서면양식<br>
+                    <br>
+                    ■ 개인정보의 수집 및 이용목적<br>
+                    회사는 수집한 개인정보를 다음의 목적을 위해 활용합니다.<br>
+                    ο 서비스 제공에 관한 계약 이행 및 서비스 제공에 따른 요금정산 콘텐츠 제공 , 구매 및 요금 결제 , 물품배송 또는 청구지 등 발송<br>
+                    ο 회원 관리<br>
+                    회원제 서비스 이용에 따른 본인확인 , 개인 식별 , 연령확인 , 만14세 미만 아동 개인정보 수집 시 법정 대리인 동의여부 확인 , 고지사항 전달<br>
+                    ο 마케팅 및 광고에 활용 접속 빈도 파악 또는 회원의 서비스 이용에 대한 통계<br>
+                    <br>
+                    ■ 개인정보의 보유 및 이용기간<br>
+                    회사는 개인정보 수집 및 이용목적이 달성된 후에는 예외 없이 해당 정보를 지체 없이 파기합니다.<br>
+                    <br>
+                    #개인정보의 위탁 처리<br>
+                    “다비다”는 서비스 향상을 위해 관계법령에 따라 회원의 동의를 얻거나 관련 사항을 공개 또는 고지 후 회원의 개인정보를 외부에 위탁하여 처리하고 있습니다.<br>
+                    “다비다”의 개인정보처리 수탁자와 그 업무의 내용은 다음과 같습니다.<br>
+                    <br>
+                    - 수탁자 : (주)호중소프트<br>
+                    - 위탁 업무 내용 : 카카오 알림톡 발송 업무<br>
+                    <br>
+                    - 수탁자 : (주)호중컴퍼니<br>
+                    - 위탁 업무 내용 : SMS, 카카오톡 알림톡을 이용한 이벤트 전달<br>
+                    - 수집항목 : 이름, 아이디, 휴대폰번호<br>
+                    - 보유기간 : 회원 탈퇴 시 혹은 법정 보유기간<br>
+                </div>
+            </div>
+
+            <div class="d-flex mt-2 mb-3">
+                <label class="form-check-label p-1 me-1" for="checkbox" style="font-size:12px;">개인정보 수집 및 이용에 동의하십니까?</label>
+                <div class="mb-3 form-check">
+                    <input type="checkbox" class="form-check-input" id="checkbox" name="checkbox">
+                    <div style="font-size:12px;" class="p-1">동의함</div>
+                </div>
+            </div>
+
+            <div class="offset-3 mb-3">
+                <button type="submit" onclick="return confirm();" class="btn btn-secondary btn-sm"  style="width:7rem;">회원 가입</button>
+            </div>
+
+        </form>
+        <br>
+
+    </div>
+
+
+</div>
+
+<th:block layout:fragment="script-content">
+
+    <script>
+        async function postJSON(data) {
+            try {
+                const response = await fetch("http://localhost:8080/teacherCheck", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(data),
+                });
+
+                document.getElementById('teacherCode1').innerText = '';
+                const checkResult = await response.text();
+                //const result = await response.json();       json으로 받기
+                if(checkResult === 'duplicate') {
+                    console.log("존재함");
+                    teacherCode1.style.color = "green";
+                    document.getElementById('teacherCode1').innerText = '인증 되었습니다.';
+                }
+                console.log("Success :", checkResult);
+            } catch (error) {
+                console.error("Error :", error);
+            }
+        }
+        function teacherCheck() {
+            const data = { teacherCode: document.getElementById('teacherCode').value };
+            postJSON(data);
+        }
+    </script>
+
+    <script>
+        function test_subject_change() {
+            let element = document.getElementById('test_subject');
+            var subject = element.options[element.selectedIndex].value;
+            var text = element.options[element.selectedIndex].text;
+        }
+    </script>
+
+    <script>
+        function show(value) {
+            var s1 = document.getElementById("stumobile");
+            var s2 = document.getElementById("stuteam");
+            var s3 = document.getElementById("tnumber");
+            var t1 = document.getElementById("teasub");
+
+            if (value === 'ROLE_USER') {
+                s1.style.display = 'block';
+                s2.style.display = 'block';
+                s3.style.display = 'none';
+                t1.style.display = 'none';
+            } else if (value === 'ROLE_ADMIN') {
+                s1.style.display = 'none';
+                s2.style.display = 'none';
+                s3.style.display = 'block';
+                t1.style.display = 'block';
+            }
+        }
+    </script>
+
+    <script>
+        function confirm() {
+            const passwordValue = document.getElementById('password').value;
+            const password2Value = document.getElementById('password2').value;
+            const reg = /^(?=.*[a-zA-Z])(?=.*\d|(?=.*\W)).{8,16}$/;
+
+            if (!reg.test(passwordValue)) {
+                document.getElementById('passwordHelp').innerText = '비밀번호는 영문 대소문자/숫자/특수문자 중 2가지 이상 조합, 8자~16자로 설정해야 합니다.';
+                password.focus();
+                return false;
+            } else if (passwordValue !== password2Value) {
+                document.getElementById('passwordHelp').innerText = '비밀번호가 일치하지 않습니다.';
+                password.focus();
+                return false;
+            } else {
+                document.getElementById('passwordHelp').innerText = '';
+                passwordHelp.removeClass('passwordHelp');
+                return true;
+            }
+        }
+    </script>
+
+
+    <script>
+        function confirm1() {
+            const InputnameValue = document.getElementById('Inputname').value;
+            const reg = /^[가-힣]{2,8}$/;
+
+            if (!reg.test(InputnameValue)) {
+                document.getElementById('nameMessage').innerText = '알맞은 이름을 입력하십시오.';
+                Inputname.focus();
+                return false;
+            } else {
+                document.getElementById('nameMessage').innerText = '';
+                document.getElementById('nameMessage').className = ''; // Remove the class
+                return true;
+            }
+        }
+    </script>
+
+
+
+
+
+    <script>
+        async function postJSON1(data) {
+            try {
+                const response = await fetch("http://localhost:8080/usernamecheck", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(data),
+                });
+
+                document.getElementById('username1').innerText = '';
+                const result = await response.text();
+                if (result === 'duplicate') {
+                    console.log("존재함");
+                    username1.style.color = "red";
+                    document.getElementById('username1').innerText = '중복된 아이디 입니다';
+                    username.focus();
+                }
+                console.log("Success:", result);
+            } catch (error) {
+                console.error("Error:", error);
+            }
+        }
+
+        function userNameCheck() {
+            const data = { username: document.getElementById('username').value };
+            postJSON1(data);
+        }
+    </script>
+
+<!--    <script>-->
+<!--        function check() {-->
+<!--            var admin= document.getElementById('admin');-->
+<!--            var user = document.getElementById('user');-->
+<!--            var submitBtn = document.getElementById('submitBtn');-->
+
+<!--            if (!document.getElementById('username').value) {-->
+<!--                alert('아이디를 입력해주세요!');-->
+<!--                return false;-->
+<!--                } else if (!document.getElementById('number').value) {-->
+<!--                    alert('인증번호를 입력하십시오!');-->
+<!--                    return false;-->
+
+<!--            } else if (!document.getElementById('Inputname').value) {-->
+<!--                alert('이름을 입력해주세요!');-->
+<!--                return false;-->
+<!--            } else if (admin.checked&& !document.getElementById('teacherCode').value) {-->
+<!--                alert('선생님 코드을 입력해주세요!');-->
+<!--                return false;-->
+<!--            } else if (!document.getElementById('password').value) {-->
+<!--                alert('비밀번호를 입력해주세요!!');-->
+<!--                return false-->
+
+<!--            } else if (!document.getElementById('password2').value) {-->
+<!--                alert('비밀번호확인을 입력해주세요!');-->
+<!--                return false;-->
+
+<!--            } else if (!document.getElementById('mobile').value) {-->
+<!--                alert('휴대전화 번호를 입력해주세요!');-->
+<!--                return false;-->
+<!--            } else if (!phoneLength()) {-->
+<!--                return false;-->
+<!--            } else if (user.checked && !document.getElementById('mobile2').value) {-->
+<!--                alert('부모님 번호를 입력해주세요!');-->
+<!--                return false;-->
+<!--            } else if (!document.getElementById('checkbox').checked) {-->
+<!--                alert('가입에 동의 해주세요!');-->
+<!--                return false;-->
+<!--            }-->
+
+<!--            submitBtn.disabled = false;-->
+
+<!--            return true;-->
+<!--        }-->
+<!--        const phoneNum = document.querySelector("#mobile");-->
+<!--        const failMessage = document.querySelector(".failMessage");-->
+<!--        const reg = /^[0-9]{11}$/;-->
+
+<!--        function phoneLength() {-->
+<!--            const value = phoneNum.value;-->
+<!--            if (!reg.test(value) || value.length !== 11) {-->
+<!--                failMessage.classList.remove("hide");-->
+<!--                phoneNum.focus();-->
+<!--                return false;-->
+<!--            } else {-->
+<!--                failMessage.classList.add("hide");-->
+<!--                return true;-->
+<!--            }-->
+<!--        }-->
+
+<!--        phoneNum.onkeyup = function () {-->
+<!--            phoneLength();-->
+<!--        }-->
+
+<!--    </script>-->
+    <script>
+
+    </script>
+
+
+
+    <script type="text/javascript">
+        function sendNumber() {
+            $("#mail_number").css("display", "block");
+            $.ajax({
+                url: "/mail",
+                type: "post",
+                dataType: "json",
+                data: { "username": $("#username").val() },
+                success: function (data) {
+                    alert("인증번호 발송");
+                    $("#Confirm").attr("value", data);
+                }
+            });
+        }
+
+        function confirmNumber() {
+            var number1 = $("#number").val();
+            var number2 = $("#Confirm").val();
+
+            if (number1 == number2) {
+                return true;
+            } else {
+                alert("번호가 다릅니다.");
+                $("#number").focus();
+                return false;
+            }
+        }
+    </script>
+
+
+</th:block>

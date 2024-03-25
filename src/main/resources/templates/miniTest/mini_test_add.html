@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.2/css/bootstrap.min.css}"/>
+    <script src="webjars/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap-icons/1.11.1/font/bootstrap-icons.css}" />
+    <link rel="stylesheet" href="/css/test1.css">
+    <link rel="stylesheet" href="/js/test.js">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat&family=Edu+TAS+Beginner:wght@500&family=Gothic+A1&family=Nanum+Gothic+Coding&family=Noto+Sans+KR&family=Shadows+Into+Light&family=Sunflower:wght@300&family=The+Girl+Next+Door&display=swap" rel="stylesheet">
+
+    <link rel="icon" type="image/png" sizes="16x16"  href="images/favicon-16x16.png">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="theme-color" content="#ffffff">
+    <meta charset="UTF-8">
+    <title>쪽지시험등록</title>
+</head>
+<body>
+<div class="d-flex flex-column ms-3 mt-1 mb-2">
+
+    <div class="shadow mt-3 p-3 ms-3 mb-2 bg-body-tertiary" style="width:51rem; height:auto;">
+        <input th:value="${testNumberUuidAdd}" type="hidden" class="flex-content">
+        <form th:action="@{/question_add/{uuid}(uuid=${testNumberUuidAdd})}" th:object="${questionForm}"  enctype="multipart/form-data" method="post" >
+            <div class="d-flex flex-row ms-3 mt-3 mb-3" style="width:50rem;">
+                <div class="mt-3">
+                    <label for="exampleFormControlTextarea1" class="form-label p-2" style="width:7rem; font-size:13px;color:rgb(85, 85, 85);">시험문제</label>
+                </div>
+                <textarea type="text" class="form-control me-2 p-2" id="exampleFormControlTextarea1"  rows="3" th:field="*{title}" style="width:35rem; font-size:13px;"></textarea>
+                <div class="validation_error mt-3" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></div>
+            </div>
+
+            <div class="d-flex flex-row ms-3 mb-3" style="width:50rem;">
+                <div style="width:7rem;font-size:13px; color:rgb(85, 85, 85);">
+                    <label class="form-label p-2">문제 사진</label>
+                </div>
+                <div class="input-group mb-3" style="width:35rem;">
+                    <input type="file" class="form-control form-control-sm" name="imgFile" accept="image/png, image/jpeg" style="width:12rem; font-size:12px;" />
+                </div>
+            </div>
+
+
+            <div class="d-flex flex-row ms-3 mb-3" style="width:50rem;">
+                <div class="mb-3" style="width:7rem;font-size:13px;color:rgb(85, 85, 85);">
+                    <label class="form-label p-2">보기</label>
+                </div>
+
+                <div style="width:35rem;">
+                    <div class="input-group input-group-sm mb-2" >
+                        <span class="input-group-text">①</span>
+                        <input th:field="*{choice1}" type="text" class="form-control form-control-sm" placeholder="선택지 입력" style="font-size:12px;">
+                        <div class="validation_error p-1" th:if="${#fields.hasErrors('choice1')}" th:errors="*{choice1}"></div>
+                    </div>
+
+                    <div class="d-flex flex-row mb-3">
+                        <input type="file" class="form-control form-control-sm mb-2"  name="choice1Img" style="font-size:12px;width:15rem;">
+                        <div class="ms-1 p-1" style="font-size:12px;color:rgb(189, 192, 194);">(사진첨부 희망시 사용 해 주세요.)</div>
+                    </div>
+
+                    <div class="input-group input-group-sm mb-2" >
+                        <span class="input-group-text">②</span>
+                        <input th:field="*{choice2}" type="text" class="form-control me-2" placeholder="선택지 입력" style="font-size:12px;width:20rem;">
+                        <div class="validation_error p-1" th:if="${#fields.hasErrors('choice2')}" th:errors="*{choice2}"></div>
+                    </div>
+
+                    <div class="d-flex flex-row mb-3">
+                        <input type="file" class="form-control form-control-sm mb-2"  name="choice2Img" style="font-size:12px;width:15rem;">
+                        <div class="ms-1 p-1" style="font-size:12px;color:rgb(189, 192, 194);">(사진첨부 희망시 사용 해 주세요.)</div>
+                    </div>
+
+
+                    <div class="input-group input-group-sm mb-2" >
+                        <span class="input-group-text">③</span>
+                        <input th:field="*{choice3}"  type="text" class="form-control me-2" placeholder="선택지 입력" style="font-size:12px;">
+                        <div class="validation_error p-1" th:if="${#fields.hasErrors('choice3')}" th:errors="*{choice3}"></div>
+                    </div>
+
+                    <div class="d-flex flex-row mb-3">
+                        <input type="file" class="form-control form-control-sm mb-2"  name="choice3Img" style="font-size:12px;width:15rem;">
+                        <div class="ms-1 p-1" style="font-size:12px;color:rgb(189, 192, 194);">(사진첨부 희망시 사용 해 주세요.)</div>
+                    </div>
+
+
+                    <div class="input-group input-group-sm mb-2" >
+                        <span class="input-group-text">④</span>
+                        <input th:field="*{choice4}" type="text" class="form-control me-2" placeholder="선택지 입력" style="font-size:12px;width:8rem;">
+                        <div class="validation_error p-1" th:if="${#fields.hasErrors('choice4')}" th:errors="*{choice4}"></div>
+                    </div>
+
+                    <div class="d-flex flex-row mb-3">
+                        <input type="file" class="form-control form-control-sm mb-2"  name="choice4Img" style="font-size:12px;width:15rem;">
+                        <div class="ms-1 p-1" style="font-size:12px;color:rgb(189, 192, 194);">(사진첨부 희망시 사용 해 주세요.)</div>
+                    </div>
+
+
+                </div>
+            </div>
+
+            <div class="d-flex flex-row ms-3 mb-1" style="width:50rem;">
+                <div style="width:7rem;font-size:13px;color:rgb(85, 85, 85);">
+                    <label class="form-label p-2">정답</label>
+                </div>
+                <div class="input-group mb-3" style="width:35rem;">
+                    <input th:field="*{correctAnswer}" type="text" class="form-control form-control-sm" placeholder="정답 입력">
+                    &nbsp; <div class="validation_error p-1" th:if="${#fields.hasErrors('correctAnswer')}" th:errors="*{correctAnswer}"></div>
+                </div>
+            </div>
+
+            <div class="mt-2 offset-5" style="width:10rem;">
+                <button type="submit" class="btn btn-link" value="문제 등록"
+                        onclick="window.location.reload();"
+                        style="text-decoration: none;background-color:rgb(250, 161, 161);color:white; font-size:13px;">
+                    등 록
+                </button>
+            </div>
+        </form>
+    </div>
+
+
+
+
+</div>
+</div>
+
+
+
+</body>
+</html>

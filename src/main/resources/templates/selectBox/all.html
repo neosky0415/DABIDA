@@ -1,0 +1,91 @@
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      layout:decorate="~{manager/managerlayout}"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>manager page</title>
+</head>
+
+<div layout:fragment="content">
+
+    <div class="d-flex flex-column mb-3">
+
+        <div class="mt-5">
+            총관리자 페이지
+        </div>
+
+        <div class="mt-2" style="font-size:13px;color:rgb(154, 154, 154);">
+            "관리자님,페이지 관리를 위해 아래 목록을 이용해주세요<i class="bi bi-emoji-smile"></i>"
+        </div>
+            <a th:href="@{/teacherCode}" onclick="window.open(this.href,'/teacherCode', 'width=500, height=400, left=600, top=300, scrollbars=no');return false;"
+               class="p-1 mb-3" style="color:rgb(154, 154, 154); font-size:13px;">
+                <i class="bi bi-key" style="color:rgb(74, 197, 206);"></i> 선생님 회원가입 코드 관리
+            </a>
+
+
+        <div class="d-flex flex-column mt-3 mb-3">
+            <div class="d-flex justify-content-center mt-5">
+                <div class="d-flex justify-content-center mt-5 mb-5 me-5">
+
+                    <div class="card mt-5" style="width:28rem;">
+                        <div class="card-header" style="font-size:14px;">
+                            <i class="bi bi-people-fill me-2"></i>가입자 명단
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Dabida 가입자</h5>
+                            <p class="card-text" style="font-size:13px;">
+                                홈페이지 가입자 명단으로 학생 및 직원을 확인할 수 있습니다.<br>
+                                아래 버튼을 눌러서 가입자 명단을 확인해보세요.
+                            </p>
+                            <a href="/userList" class="btn btn-link mt-3" style="text-decoration: none;background-color:rgb(147, 212, 226);color:white;" >
+                                가입자 확인하기
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="d-flex justify-content-center mt-5 mb-5 me-5">
+                    <div class="card mt-5" style="width:28rem;">
+                        <div class="card-header" style="font-size:14px;">
+                            <i class="bi bi-bookmark-check-fill me-2"></i>개강 반
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Dabida 개강반</h5>
+                            <p class="card-text" style="font-size:13px;">
+                                원내 등록 되어있는 개강반 목록확인 및 추가,수정,삭제를 할 수 있습니다.<br>
+                                아래 버튼을 눌러서 등록반을 확인해보세요.</p>
+                            <a href="/team_list" class="btn btn-link mt-3" style="text-decoration: none;background-color:rgb(147, 212, 226);color:white;" >
+                                개강반 확인하기
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-center mt-5 mb-5">
+                    <div class="card mt-5" style="width:28rem;">
+                        <div class="card-header" style="font-size:14px;">
+                            <i class="bi bi-book-fill me-2"></i>개강 과목
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Dabida 개강과목</h5>
+                            <p style="font-size:13px;">
+                                원내 개강 되어있는 과목 목록확인 및 추가,수정,삭제를 할 수 있습니다.<br>
+                                아래 버튼을 눌러서 개강과목을 확인해보세요.</p>
+                            <a href="/subject_list" class="btn btn-link mt-3" style="text-decoration: none;background-color:rgb(147, 212, 226);color:white;" >
+                                개강과목 확인하기
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<th:block layout:fragment="script-content">
+
+</th:block>

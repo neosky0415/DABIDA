@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>주의사항</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.2/css/bootstrap.min.css}"/>
+    <script src="webjars/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap-icons/1.11.1/font/bootstrap-icons.css}" />
+    <link rel="stylesheet" href="/css/test.css">
+    <link rel="stylesheet" href="/js/test.js">
+
+    <link rel="icon" type="image/png" sizes="16x16"  href="images/favicon-16x16.png">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="theme-color" content="#ffffff">
+</head>
+<body style=" background-color:rgb(233, 232, 232);">
+
+<div class="d-flex justify-content-center">
+    <br>
+    <br>
+    <div class="d-flex flex-column mt-5 mb-3">
+
+        <h3 class="mt-5">
+            <i class="bi bi-exclamation-triangle-fill" style="color:rgb(253, 158, 64);"></i>시험전 주의사항<i class="bi bi-exclamation-triangle-fill" style="color:rgb(253, 158, 64);"></i>
+        </h3>
+    </div>
+</div>
+
+<div class="d-flex justify-content-center">
+        <div class="shadow-sm p-3 mt-3 mb-5 bg-body-tertiary rounded" style="width:40rem;color:rgb(71, 71, 71);">
+            -시험 시간은 30분이며, 시험시작과 동시에 타이머는 작동 됩니다.<br>
+            <br>
+            -시험 응시는 <span style="color:rgb(253, 158, 64);">1회만</span> 가능 합니다.<br>
+            <br>
+            -모든 문제를 풀고 시험지를 제출 해 주세요.<br>
+            <br>
+            -시험의 유형은 '한 문제씩 풀기 , 한번에 풀기' <span style="color:rgb(253, 158, 64);">2가지 유형중</span> 선택하여 응시 해 주세요.<br>
+            <br>
+            -시험지 제출과 동시에 점수는 바로 확인 하실 수 있습니다.<br>
+            <br>
+            -시험 중 오류는 학원(042-123-4567)으로 연락 바랍니다.
+        </div>
+</div>
+
+    <div class="d-flex justify-content-center">
+        <a href="/test0" type="button" class="btn btn-link me-5" style="width:10rem;text-decoration:none;background-color:rgb(253, 158, 64);color:white;">
+            한 문제씩 풀기
+        </a>
+        <a   href="/test2"  type="button" class="btn btn-link" style="width:10rem;text-decoration:none;background-color:rgb(253, 158, 64);color:white;">
+            한번에 풀기
+        </a>
+    </div>
+
+
+
+</body>
+</html>

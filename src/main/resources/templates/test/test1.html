@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.2/css/bootstrap.min.css}"/>
+    <script src="webjars/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap-icons/1.11.1/font/bootstrap-icons.css}" />
+    <link rel="stylesheet" href="/css/test.css">
+    <link rel="stylesheet" href="/js/test.js">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sunflower:wght@300&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" sizes="16x16"  href="images/favicon-16x16.png">
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.2/css/bootstrap.min.css}"/>
+    <script src="webjars/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="theme-color" content="#ffffff">
+    <meta charset="UTF-8">
+    <script src="path/to/customModal.js"></script>
+    <title>자격증_시험</title>
+    <style>
+        .answer-choices-horizontal label {
+            pointer-events: none;
+        }
+        body {
+            font-family: 'Sunflower', sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            /*메인스크롤 안보이게 */
+            overflow: hidden;
+        }
+
+        #about {
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        .content-wrapper {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+        }
+
+        .left-container {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+        }
+
+        .question-container {
+            margin-bottom: 20px;
+            overflow-wrap: break-word;
+        }
+
+        .list-group-item {
+            border: none;
+            padding: 10px;
+        }
+
+        .answer-choices-container {
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+        }
+
+        .answer-choice {
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .fixed-bottom-buttons {
+            background-color: #fff;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+            padding: 10px;
+            border-top: 1px solid #ddd;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        button.next-button {
+            width: 120px;
+            font-size: 16px;
+            margin-right: 10px;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left:50%;
+            top:50%;
+            transform: translate(-50%, -50%);
+            background-color: #fff;
+            padding:20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2), 0px 6px 20px rgba(0, 0, 0, 0.19);
+        }
+
+        .modal-bg {
+            display: none;
+            position: fixed;
+            z-index: 999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        .modal img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .modal-close-btn {
+            cursor: pointer;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+
+        .fixed-bottom-buttons {
+            position:fixed;
+            bottom:0;
+            width:100%;
+            background-color: white;
+            padding:10px;
+            box-shadow: 0px -5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .answer-choices-container {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 20%; /* Adjust the width as needed */
+            padding: 20px;
+            border: 1px solid #ccc;
+            height: 100vh;
+            overflow-y: auto; /* Add overflow-y property */
+        }
+
+
+        .answer-choice {
+            margin-bottom: 10px;
+        }
+
+        .answer-choices-horizontal {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .answer-checkbox {
+            margin-right: 5px;
+        }
+        #about {
+            background-image: url(/images/test1.png); /* 새로운 이미지 파일 경로 */
+            min-height: 100vh;
+        }
+        h2 {
+            text-indent: -9999px;                 /* sends the text off-screen */
+            height: 150px;                        /* be sure to set height & width */
+            width: 100px;
+            white-space: nowrap;            /* because only the first line is indented */
+        }
+
+        h2 a {
+            outline: none; /* prevents dotted line when link is active */
+        }
+
+        /*시계 크기 설정*/
+        #digital-clock {
+            font-size: 14px; /* 시계 크기 조절 */
+            color: #000; /* 시계 텍스트 색상 */
+        }
+
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+    <div id="about" class="big-bg">
+        <form th:action="@{/test_result}" th:object="${testForm}" method="get">
+
+            <div class="mt-3 mb-2">대전학원</div>
+            <div class="d-flex flex-row mb-3 border rounded" style="width:68rem;height:4rem;background-color:white;">
+                <div th:text="${testSubject}+ '시험'" class="ms-3 mt-3 mb-1 p-1 border shadow-sm rounded"
+                     style="font-size:17px; width:10rem; height:2rem;color:rgb(253, 158, 64);"></div>
+                <div class="ms-5 mt-3 mb-1 p-1 border shadow-sm rounded" style="font-size:17px;width:80rem; height:2rem;">
+                    <div class="d-flex flex-row">
+                        <div class="ms-1 me-5" style="font-size:14px;">제한 시간:30분</div>
+                        <div class="d-flex flex-row ms-5" style="font-size:14px;">
+                            남은 시간:<div id="digital-clock" class="ms-1">30</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flex" >
+                <div class="left-container" style="width:68rem; height:580px; overflow-y:auto;">
+                    <div th:each="question, stat : ${questionList}" class="question-container" data-index="${stat.count - 1}">
+                        <div>
+                            <div class="mt-3 ms-3 p-1" style="background-color:rgb(224, 241, 247); font-size:17px; width:66rem;">
+                                &nbsp; <strong>[[${stat.count}]]</strong>.&nbsp;[[${question.title}]]
+                            </div>
+                            <div class="text-center mt-3 offset-1">
+
+                                <div th:if="${question.getImgPath() eq null}">
+                                    <div> </div>
+                                </div>
+                                <div th:unless="${question.getImgPath() eq null}">
+                                    <img  class='img-thumbnail' width="200px" height="240px" th:src="@{|/uploads/${question.getImgPath()}|}" onerror="this.style.display='none'">
+                                </div>
+
+                            </div>
+
+
+                            <ul class="mt-3 ms-3">
+                                <div th:with="my='test_' + ${stat.count}">
+                                    <li class="list-group-item">
+                                        <input type="radio" th:field="*{__${my}__}" th:name="${'question_' + stat.count}" value="1"/>
+                                        <label th:for="${#ids.prev(my)}" th:text="' ①' + ${question.choice1}" ></label>
+
+                                        <div th:if="${question.getChoice1Img() eq null}">
+                                            <div> </div>
+                                        </div>
+                                        <div th:unless="${question.getChoice1Img() eq null}">
+                                            <img  class='img-thumbnail' width="200px" height="240px" th:src="@{|/uploads/${question.getChoice1Img()}|}" onerror="this.style.display='none'">
+                                        </div>
+
+                                    </li>
+                                    <br>
+                                    <li class="list-group-item">
+                                        <input type="radio" th:field="*{__${my}__}" th:name="${'question_' + stat.count}" value="2"/>
+                                        <label th:for="${#ids.prev(my)}" th:text="' ②' + ${question.choice2}" ></label>
+
+                                        <div th:if="${question.getChoice2Img() eq null}">
+                                            <div> </div>
+                                        </div>
+                                        <div th:unless="${question.getChoice2Img() eq null}">
+                                            <img  class='img-thumbnail' width="200px" height="240px" th:src="@{|/uploads/${question.getChoice2Img()}|}" onerror="this.style.display='none'">
+                                        </div>
+
+                                    </li>
+                                    <br>
+                                    <li class="list-group-item">
+                                        <input type="radio" th:field="*{__${my}__}" th:name="${'question_' + stat.count}" value="3"/>
+                                        <label th:for="${#ids.prev(my)}" th:text="' ③' + ${question.choice3}" ></label>
+
+                                        <div th:if="${question.getChoice3Img() eq null}">
+                                            <div> </div>
+                                        </div>
+                                        <div th:unless="${question.getChoice3Img() eq null}">
+                                            <img  class='img-thumbnail' width="200px" height="240px" th:src="@{|/uploads/${question.getChoice3Img()}|}" onerror="this.style.display='none'">
+                                        </div>
+
+                                    </li>
+                                    <br>
+                                    <li class="list-group-item">
+                                        <input type="radio" th:field="*{__${my}__}" th:name="${'question_' + stat.count}" value="4"/>
+                                        <label th:for="${#ids.prev(my)}" th:text="' ④' + ${question.choice4}" ></label>
+
+                                        <div th:if="${question.getChoice4Img() eq null}">
+                                            <div> </div>
+                                        </div>
+                                        <div th:unless="${question.getChoice4Img() eq null}">
+                                            <img  class='img-thumbnail' width="200px" height="240px" th:src="@{|/uploads/${question.getChoice4Img()}|}" onerror="this.style.display='none'">
+                                        </div>
+
+                                    </li>
+                                </div>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- omr카드  -->
+                <div class="answer-choices-container mt-3 me-2" style="width:17rem;height:690px;background-color: transparent;">
+                    <strong>답안지</strong>
+
+                    <div th:each="question, stat : ${questionList}" class="answer-choice">
+                        <p><strong>[[${stat.count}]]</strong></p>
+                        <ul class="answer-choices-horizontal">
+                            <li>
+                                <input type="checkbox"  class="answer-checkbox question-[[${stat.count}]]" id="answer[[${stat.count}]]_1" name="answer[[${stat.count}]]" value="1"/>
+                                <label for="answer[[${stat.count}]]_1">① </label>
+                            </li>
+                            <li>
+                                <input type="checkbox" class="answer-checkbox question-[[${stat.count}]]" id="answer[[${stat.count}]]_2" name="answer[[${stat.count}]]" value="2"/>
+                                <label for="answer[[${stat.count}]]_2">②</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" class="answer-checkbox question-[[${stat.count}]]" id="answer[[${stat.count}]]_3" name="answer[[${stat.count}]]" value="3"/>
+                                <label for="answer[[${stat.count}]]_3">③</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" class="answer-checkbox question-[[${stat.count}]]" id="answer[[${stat.count}]]_4" name="answer[[${stat.count}]]" value="4"/>
+                                <label for="answer[[${stat.count}]]_4">④</label>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="fixed-bottom-buttons d-flex justify-content-center mt-3 mb-1 rounded" style="width:85rem; height:5rem;background-color:rgb(184, 184, 184);">
+                <div class="mt-3 mb-5 ms-auto">
+                    <button id="submit-button" type="submit" class="btn btn-secondary float-end" style="width:8rem;font-size:15px;" disabled>
+                        시험지 제출 <i class="bi bi-arrow-bar-right"></i>
+                    </button>
+                </div>
+            </div>
+
+
+        </form>
+    </div>
+    <br>
+</div>
+
+
+
+<script th:inline="javascript">
+    document.addEventListener("DOMContentLoaded", function () {
+        const questionContainers = document.querySelectorAll(".question-container");
+        const answerContainers = document.querySelectorAll(".answer-choice");
+        const submitButton = document.querySelector("#submit-button");
+        const totalQuestions = 20;
+        const checkboxStates = new Array(totalQuestions).fill(0);
+
+        function showAllQuestions() {
+            questionContainers.forEach((container, index) => {
+                container.style.display = "block";
+                synchronizeAnswer(index);
+            });
+
+            submitButton.disabled = false;
+        }
+
+        function synchronizeAnswer(index) {
+            const answerCheckboxes = answerContainers[index].querySelectorAll(".answer-checkbox");
+            const questionRadioButtons = questionContainers[index].querySelectorAll("input[type='radio']");
+
+            answerCheckboxes.forEach((checkbox, i) => {
+                checkbox.addEventListener("change", () => {
+                    const checkedIndex = checkbox.checked ? i : -1;
+
+                    answerCheckboxes.forEach((otherCheckbox, j) => {
+                        if (i !== j) {
+                            otherCheckbox.checked = false;
+                        }
+                    });
+
+                    questionRadioButtons[checkedIndex].checked = checkbox.checked;
+
+                    checkboxStates[index] = checkedIndex + 1;
+                    submitButton.disabled = !checkboxStates.some(state => state !== 0);
+                });
+            });
+
+            questionRadioButtons.forEach((radio, i) => {
+                radio.addEventListener("change", () => {
+                    answerCheckboxes.forEach((checkbox, j) => {
+                        checkbox.checked = i === j;
+                    });
+
+                    const checkedIndex = radio.checked ? i : -1;
+                    checkboxStates[index] = checkedIndex + 1;
+                    submitButton.disabled = !checkboxStates.some(state => state !== 0);
+                });
+            });
+        }
+
+        function scrollToQuestion(index) {
+            questionContainers[index].scrollIntoView({
+                behavior: 'smooth',
+                block: 'start',
+            });
+        }
+
+        answerContainers.forEach((container, index) => {
+            container.addEventListener("click", () => {
+                synchronizeAnswer(index);
+                scrollToQuestion(index);
+            });
+        });
+
+        showAllQuestions();
+
+        alert('시험 시간은 10분이며, 이후 자동 종료 됩니다.');
+
+        function redirectToNextPage() {
+            setTimeout(function () {
+                alert('시험이 종료 되었습니다.');
+                window.location.href = '/test_result';
+            }, 31000000); // 30초 (1초 = 1000 밀리초)
+        }
+
+        window.onload = redirectToNextPage;
+
+        var clockElement = document.getElementById('digital-clock');
+        var seconds = 30;
+
+        function updateClock() {
+            if (seconds > 0) {
+                var minutes = Math.floor(seconds / 60);
+                var remainingSeconds = seconds % 60;
+                var formattedTime = minutes + ':' + (remainingSeconds < 10 ? '0' : '') + remainingSeconds;
+                clockElement.textContent = formattedTime;
+
+                if (seconds <= 5) {
+                    clockElement.style.color = 'red';
+                } else {
+                    clockElement.style.color = '#000';
+                }
+
+                seconds--;
+            } else {
+                clearInterval(clockInterval);
+                clockElement.textContent = '';
+            }
+        }
+
+        var clockInterval = setInterval(updateClock, 1000);
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.2/css/bootstrap.min.css}"/>
+    <script src="webjars/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap-icons/1.11.1/font/bootstrap-icons.css}" />
+    <link rel="stylesheet" href="/css/test.css">
+    <link rel="stylesheet" href="/js/test.js">
+
+
+    <link rel="icon" type="image/png" sizes="16x16"  href="images/favicon-16x16.png">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="theme-color" content="#ffffff">
+
+    <meta charset="UTF-8">
+    <title>회원탈퇴</title>
+</head>
+
+
+<div class="d-flex justify-content-center">
+    <div class="d-flex flex-column mt-3 mb-2">
+        <div class="p-2">
+            <img th:src="@{/images/delete.png}" class="rounded-circle" alt="..." style="width:3rem;height:3rem;object-fit:cover;">
+        </div>
+    </div>
+</div>
+
+<div class="d-flex justify-content-center mb-3">
+    <h3 style="color:rgb(31, 31, 85);">회원탈퇴 신청 완료</h3>
+</div>
+
+    <div class="d-flex justify-content-center">
+        <div class="border rounded" style="width:40rem;">
+          <div class="d-flex mb-3">
+              <div class="d-flex mt-3 mb-3">
+                  <div class="p-1 mt-1 ms-3"><i class="bi bi-person-check" style="color:rgb(153, 153, 153);"></i></div>
+                  <div class="me-2 mt-2" style="font-size:14px; width:5rem;">탈퇴 ID</div>
+                  <div class="me-5 mt-2"><a th:text="${delUser}"></a></div>
+              </div>
+          </div>
+          </div>
+        </div>
+    </div>
+
+<div class="d-flex justify-content-center mt-2">
+    <button type="button"  class="btn btn-link btn-sm"
+            style="text-decoration:none;background-color:rgb(128, 128, 128);color:white;width:3rem;"
+            onclick="closeWindow();">
+        닫기
+    </button>
+</div>
+
+</div>
+
+
+
+<script>
+    function closeWindow() {
+  if (window.opener && !window.opener.closed) {
+    window.close();
+    window.opener.location.href = "/logout";
+  }
+}
+</script>
+
+</html>

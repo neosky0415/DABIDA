@@ -1,0 +1,55 @@
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+<th:block th:fragment="sidebar" >
+
+    <div class="d-inline-flex me-2 p-2">
+        <nav class="nav flex-column rounded-start" style="background-color:rgb(32, 32, 32);width:20rem;">
+                        <div id="m1" class="d-flex flex-row pt-3" style="color:white; border-bottom:1px solid white;" th:if="${#authentication.principal.userImgPath eq null} ">
+                            <img th:src="@{/images/mug.png}" class="rounded-circle ms-2 mb-1  me-1" alt="프로필사진" style="width:3rem;height:3rem;object-fit:cover;">
+                            <div class="nav-item mt-3 me-4" style="color:white; font-size:12px;">
+                                <b><span sec:authentication="principal.realName"></span></b> 선생님
+                            </div>
+                        </div>
+
+                        <div id="m2" class="d-flex flex-row pt-3" style="color:white; border-bottom:1px solid white;"  th:unless="${#authentication.principal.userImgPath eq null} ">
+                            <img  th:src="@{|/uploads/${#authentication.principal.userImgPath}|}"
+                                  class="rounded-circle ms-2 mb-1 me-2" alt="프로필사진" style="width:3rem;height:3rem;object-fit:cover;">
+                            <div class="nav-item mt-3 me-4" style="color:white; font-size:12px;">
+                                <b><span sec:authentication="principal.realName"></span></b> 선생님
+                            </div>
+                        </div>
+
+            <a class="nav-link mt-2"  id="m3"
+                aria-controls="multiCollapseExample1 multiCollapseExample2" style="text-decoration:none;color:white;">
+                <i class="bi bi-stickies me-3"></i> 시험 출제
+            </a>
+            <div id="m4">
+                <a href="/mini_test_title_list" class="ms-5" id="multiCollapseExample1" style="color:white;font-size:13px;">
+                    <div class="ms-5 p-1"><i class="bi bi-box-fill" style="color:rgb(245, 179, 179);"></i> 쪽지 시험</div>
+                </a>
+            </div>
+            <div id="m5">
+                <a href="/question_testtitle_list" class="ms-5 mt-1" id="multiCollapseExample2"  style="color:white;font-size:13px;">
+                    <div class="ms-5 p-1"><i class="bi bi-box-fill" style="color:rgb(245, 179, 179);"></i> 월간평가 시험</div>
+                </a>
+            </div>
+            <a id="m6" class="nav-link" style="color:white;" href="/studentManage/team_list">
+                <i class="bi bi-clipboard2-data me-3"></i> 학생 관리
+            </a>
+            <a id="m7" class="nav-link" style="color:white;" href="/staff_info">
+                <i class="bi bi-person-fill-gear me-3"></i> 내정보 관리
+            </a>
+            <a id="m8" class="nav-link" style="color:white;" href="/all">
+                <i class="bi bi-file-earmark-lock2 me-3"></i> 총관리자
+            </a>
+
+
+
+        </nav>
+    </div>
+</th:block>
+
+<th:block layout:fragment="script-content">
+
+</th:block>

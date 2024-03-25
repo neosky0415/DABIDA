@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.2/css/bootstrap.min.css}"/>
+    <script src="webjars/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap-icons/1.11.1/font/bootstrap-icons.css}" />
+    <link rel="stylesheet" href="/css/test1.css">
+    <link rel="stylesheet" href="/js/test.js">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat&family=Edu+TAS+Beginner:wght@500&family=Gothic+A1&family=Nanum+Gothic+Coding&family=Noto+Sans+KR&family=Shadows+Into+Light&family=Sunflower:wght@300&family=The+Girl+Next+Door&display=swap" rel="stylesheet">
+
+    <link rel="icon" type="image/png" sizes="16x16"  href="images/favicon-16x16.png">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="theme-color" content="#ffffff">
+    <meta charset="UTF-8">
+    <title>선생님 코드 등록</title>
+</head>
+<body>
+
+<div class="container">
+
+    <div class="mt-4 border-bottom p-1" style="font-size:15px;">
+        <i class="bi bi-key"></i> 선생님 회원가입 전용코드
+    </div>
+
+   <div th:value="${id}"></div>
+
+    <div class="d-flex justify-content-center">
+        <h3 th:text="${teacherCode1}" class="text-center border p-2 mt-3" style="width:7rem;"></h3>
+    </div>
+
+        <div class="d-flex justify-content-center">
+            <a th:href="@{/teacherCode_edit/{id}(id=${id})}" class="btn btn-link btn-sm" style="text-decoration:none;color:rgb(248, 158, 158);font-size:14px;">
+                <div>수정을 원하시면 눌러주세요!</div>
+                <div><i class="bi bi-hand-index"></i></div>
+            </a>
+        </div>
+
+</div>
+</body>
+</html>

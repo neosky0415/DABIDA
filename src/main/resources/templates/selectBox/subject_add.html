@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.2/css/bootstrap.min.css}"/>
+    <script src="webjars/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap-icons/1.11.1/font/bootstrap-icons.css}" />
+    <link rel="stylesheet" href="/css/test1.css">
+    <link rel="stylesheet" href="/js/test.js">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat&family=Edu+TAS+Beginner:wght@500&family=Gothic+A1&family=Nanum+Gothic+Coding&family=Noto+Sans+KR&family=Shadows+Into+Light&family=Sunflower:wght@300&family=The+Girl+Next+Door&display=swap" rel="stylesheet">
+
+    <link rel="icon" type="image/png" sizes="16x16"  href="images/favicon-16x16.png">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="theme-color" content="#ffffff">
+    <meta charset="UTF-8">
+    <title>강의 등록</title>
+</head>
+
+<div class="container">
+    <div class="mt-4 border-bottom p-1" style="font-size:15px;"><i class="bi bi-clipboard2-plus"></i> 강의 추가등록</div>
+
+    <form th:action="@{/subject_add}" th:object="${subjectForm}" method="POST">
+        <div class="row g-3 align-items-center">
+            <div class="col-auto">
+                <label for="subject" class="col-form-label mt-3 p-1">강의 입력</label>
+            </div>
+            <div class="col-auto">
+                <input th:field="*{subject}" th:value="${subjectForm.subject}" type="text" id="subject" class="form-control mt-3">
+            </div>
+            <div class="col-auto">
+                <button type="submit" class="btn btn-link btn-sm mt-3" style="text-decoration:none;color:white;background-color:rgb(159, 159, 159); ">
+                    등 록
+                </button>
+                <button type="button" class="btn btn-link btn-sm mt-3" onclick="window.close();window.opener.location.reload();" style="text-decoration: none;color:white;background-color:rgb(229, 132, 154); ">
+                    닫 기
+                </button>
+            </div>
+        </div>
+        <div class="validation_error offset-2 mt-2" th:if="${#fields.hasErrors('subject')}" th:errors="*{subject}"></div>
+    </form>
+
+
+
+
+
+</div>

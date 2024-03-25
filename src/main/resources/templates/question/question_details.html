@@ -1,0 +1,84 @@
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      layout:decorate="~{manager/managerlayout}"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>문제확인</title>
+</head>
+
+<div layout:fragment="content">
+
+
+    <h4 class="ms-5 mt-5 mb-1" >문제 확인</h4>
+
+    <form th:action="@{/question_details}" th:object="${questionForm}" method="get">
+
+        <input th:field="*{quuid}"  type="hidden" class="form-control">
+
+        <br>
+        <div align="right" th:if="${create eq edite}">
+            <div style="color:gray; font-size: small;">  작성 일 : [[${#dates.format(create, 'yyyy년 MM월 dd일')}]]</div>
+        </div>
+
+        <div align="right" th:unless="${create eq edite}">
+            <div style="color:gray; font-size: small; " > &nbsp;작성 일 : [[${#dates.format(create , 'yyyy년 MM월 dd일')}]]&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+            <div style="color:gray; font-size: small;">수정 일 : [[${#dates.format(edite , 'yyyy년 MM월 dd일 a HH:MM')}]]</div>
+        </div>
+        <br>
+
+
+        <div class="row mt-2">
+            <div class="col-7 offset-1 mb-3">
+                <label class="form-label">시험 문제</label>
+                <input th:field="*{title}"  type="text" class="form-control" readonly>
+                <div class="validation_error" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-7 offset-1">
+                <div class="mb-3">
+                    <label class="form-label">보기</label>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">①</span>
+                        <input th:field="*{choice1}"  type="text" class="form-control" placeholder="선택지 입력" readonly>
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">②</span>
+                        <input th:field="*{choice2}"  type="text" class="form-control" placeholder="선택지 입력" readonly>
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">③</span>
+                        <input  th:field="*{choice3}"  type="text" class="form-control" placeholder="선택지 입력" required readonly>
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">④</span>
+                        <input th:field="*{choice4}" type="text" class="form-control" placeholder="선택지 입력"  readonly>
+                    </div>
+                </div>
+
+
+                <div class="mb-3">
+                    <label class="form-label">정답</label>
+                    <div class="input-group mb-3">
+                        <input  th:field="*{correctAnswer}" type="text" class="form-control" placeholder="정답 입력" readonly>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+    </form>
+
+    <br>
+    <br>
+
+
+
+</div>
+

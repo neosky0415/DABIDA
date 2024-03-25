@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      layout:decorate="~{layout/layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>My페이지</title>
+</head>
+
+<div layout:fragment="content">
+    <div class="offset-1 d-flex flex-row mt-3 mb-3" style="font-size:14px;">
+        <a href="/myinfo" class="border-end me-2"><div class="p-2" id="in1" style="color:rgb(253, 174, 174);"><b>프로필 수정</b></div></a>
+        <a href="/my_password" class="border-end me-2"><div class="p-2" id="in2"><b>보안설정</b></div></a>
+        <a href="/userDelete" class="border-end me-2"><div class="p-2" id="in3"><b>회원탈퇴</b></div></a>
+    </div>
+
+
+    <div class="container offset-3">
+        <br>
+        <h5 class="mt-3 mb-1"><i class="bi bi-person-fill-gear"></i> 프로필 수정</h5>
+        <div class="mb-3" style="font-size:12px;color:rgb(129, 129, 129);">페이지의 대표 프로필을 수정 하실 수 있습니다.</div>
+
+        <form th:action="@{myinfo_edit}" th:object="${userOptional}"  enctype="multipart/form-data" method="post">
+            <input th:field="*{id}" type="hidden" class="form-control">
+
+            <table class="table table-bordered" style="width:35rem;">
+                <tr>
+                    <td class="table-light pt-5 text-center" style="width:10rem;font-size:13px;">프로필 사진</td>
+                    <td>
+                        <div class="text-center">
+
+                            <div th:if="${user.getUserImgPath() eq null}">
+                                <img class="img-thumbnail mb-2" width="100px" height="100px"  th:src="@{/images/mug.png}">
+                            </div>
+                            <div th:unless="${user.getUserImgPath() eq null}">
+                                <img class="img-thumbnail mb-2" width="100px" height="100px" th:src="@{|/uploads/${user.getUserImgPath()}|}">
+                            </div>
+
+                            <input type="hidden" th:field="*{userImgPath}" class="form-control">
+                            <div class="text-center d-flex flex-row ms-3 mt-1">
+                                <div style="font-size:13px;" class="p-2">사진변경</div>
+                                <input type="file" class="form-control form-control-sm" name="userFile" accept="image/png, image/jpeg"  style="font-size:13px;width:15rem;"/>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="table-light pt-3 text-center" style="width:10rem;font-size:13px;">아이디</td>
+                    <td>
+                        <div class="text-center mt-1 ms-4">
+                            <input type="email" th:field="*{username}" class="form-control form-control-sm"  readonly style="font-size:13px;width:18.6rem;">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="table-light pt-3 text-center" style="width:10rem;font-size:13px;">이름</td>
+                    <td>
+                        <div class="text-center mt-1 ms-4">
+                            <input type="text"  th:field="*{realName}" class="form-control form-control-sm" readonly style="font-size:13px;width:18.6rem;">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="table-light pt-3 text-center" style="width:10rem;font-size:13px;">전화번호</td>
+                    <td>
+                        <div class="text-center mt-1 ms-4">
+                            <input type="text"  th:field="*{phoneNum}" class="form-control form-control-sm"  style="font-size:13px;width:18.6rem;">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="table-light pt-3 text-center" style="width:10rem;font-size:13px;">부모님 번호</td>
+                    <td>
+                        <div class="text-center mt-1 ms-4">
+                            <input type="text"  th:field="*{guardianNum}" class="form-control form-control-sm"  style="font-size:13px;width:18.6rem;">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="table-light pt-3 text-center" style="width:10rem;font-size:13px;">배정 반</td>
+                    <td>
+                        <div class="text-center mt-1 ms-4">
+                            <input type="text"  th:field="${userOptional.teamName}" class="form-control form-control-sm"  style="font-size:13px;width:18.6rem;">
+                        </div>
+                    </td>
+                </tr>
+
+            </table>
+
+            <div class="offset-2 mt-3">
+                <button type="submit"  class="btn btn-link btn-sm" style="text-decoration:none;background-color: rgb(247, 183, 175);color:white; width:5rem;">
+                    수정
+                </button>
+            </div>
+
+        </form>
+
+    </div>
+
+
+</div>
+<th:block layout:fragment="script-content">
+
+
+</th:block>

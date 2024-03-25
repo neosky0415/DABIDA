@@ -1,0 +1,172 @@
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      layout:decorate="~{manager/managerlayout}"
+>
+<head>
+    <title>문제 수정하기</title>
+</head>
+
+<div layout:fragment="content">
+    <div class="d-flex flex-column mb-3">
+        <h5 class="mt-5 mb-3 border-bottom">
+            문 제 수 정
+        </h5>
+
+        <form th:action="@{/question_edit/{uuid}(uuid=${question.testNumber.uuid})}" th:object="${question}"  enctype="multipart/form-data" method="post" >
+            <input th:field="*{quuid}"  type="hidden" class="form-control">
+            <input th:value="${question.testNumber.uuid}" type="hidden">
+
+            <div class="d-flex flex-row ms-2 mb-1">
+                <div class="p-2">
+                    <label  class="form-label mt-1" style="font-size:13px;width:7rem;">시험문제</label>
+                </div>
+                <div class="d-flex flex-column border" style="width:42rem;">
+                    <div class="p-2">
+                        <input type="text" class="form-control"  th:field="*{title}" style="font-size:13px;width:40rem;">
+                    </div>
+                    <div class="d-flex flex-column p-2">
+                        <div th:if="${question.getImgPath() eq null}"></div>
+                        <div th:unless="${question.getImgPath() eq null}">
+                            <img class="img-thumbnail mx-auto d-block p-2" style="width:11rem;height:7rem;" th:src="@{|/uploads/${question.getImgPath()}|}"  onclick="window.open(this.src)" onerror="this.style.display='none'" alt='/'>
+                        </div>
+                        <div class="d-flex flex-row d-flex justify-content-center mt-2 mb-1">
+                            <div class="mt-2">
+                                <label class="form-label me-1" style="font-size:12px;width:3rem;color:rgb(133, 133, 133);">사진선택</label>
+                            </div>
+                            <div class="mt-1">
+                                <input type="file" class="form-control form-control-sm" name="imgFile" style="font-size:13px;width:13rem;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="validation_error" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></div>
+
+            <div class="d-flex flex-row ms-2 mb-3">
+                <div class="p-2">
+                    <label  class="form-label mt-1" style="font-size:13px;width:7rem;">보 기</label>
+                </div>
+
+                <table class="table table-bordered mt-3" style="width:42rem;">
+
+                    <tr>
+                        <td class="table-light text-center" style="width:2rem;">
+                            <div class="p-1" style="font-size:13px;">①</div>
+                        </td>
+                        <td>
+                            <div class="d-flex flex-row mt-2 mb-2">
+                                <input th:field="*{choice1}" type="text" class="form-control form-control-sm me-2" placeholder="선택지 입력" style="font-size:13px;width:25rem;">
+                                <input type="file" class="form-control form-control-sm" name="choice1Img" style="font-size:13px;width:13rem;">
+                            </div>
+
+                            <div class="d-flex flex-column p-2">
+                                <div th:if="${question.getChoice1Img() eq null}"></div>
+                                <div th:unless="${question.getChoice1Img() eq null}">
+                                    <img class="img-thumbnail mx-auto d-block p-2" style="width:11rem;height:7rem;" th:src="@{|/uploads/${question.getChoice1Img()}|}"  onclick="window.open(this.src)" onerror="this.style.display='none'" alt='/'>
+                                </div>
+                            </div>
+                            <div class="validation_error" th:if="${#fields.hasErrors('choice1')}" th:errors="*{choice1}"></div>
+                        </td>
+
+                    </tr>
+
+                    <tr>
+                        <td class="table-light text-center" style="width:2rem;">
+                            <div class="p-1" style="font-size:13px;">②</div>
+                        </td>
+                        <td>
+                            <div class="d-flex flex-row mt-2 mb-2">
+                                <input th:field="*{choice2}" type="text" class="form-control form-control-sm me-2" placeholder="선택지 입력" style="font-size:13px;width:25rem;">
+                                <input type="file" class="form-control form-control-sm" name="choice2Img" style="font-size:13px;width:13rem;">
+                            </div>
+
+                            <div class="d-flex flex-column p-2">
+                                <div th:if="${question.getChoice2Img() eq null}"></div>
+                                <div th:unless="${question.getChoice2Img() eq null}">
+                                    <img class="img-thumbnail mx-auto d-block p-2" style="width:11rem;height:7rem;" th:src="@{|/uploads/${question.getChoice2Img()}|}"  onclick="window.open(this.src)" onerror="this.style.display='none'" alt='/'>
+                                </div>
+                            </div>
+                            <div class="validation_error" th:if="${#fields.hasErrors('choice2')}" th:errors="*{choice2}"></div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="table-light text-center" style="width:2rem;">
+                            <div class="p-1" style="font-size:13px;">③</div>
+                        </td>
+                        <td>
+                            <div class="d-flex flex-row mt-2 mb-2">
+                                <input th:field="*{choice3}" type="text" class="form-control form-control-sm me-2" placeholder="선택지 입력" style="font-size:13px;width:25rem;">
+                                <input type="file" class="form-control form-control-sm" name="choice3Img" style="font-size:13px;width:13rem;">
+                            </div>
+
+                            <div class="d-flex flex-column p-2">
+                                <div th:if="${question.getChoice3Img() eq null}"></div>
+                                <div th:unless="${question.getChoice3Img() eq null}">
+                                    <img class="img-thumbnail mx-auto d-block p-2" style="width:11rem;height:7rem;" th:src="@{|/uploads/${question.getChoice3Img()}|}"  onclick="window.open(this.src)" onerror="this.style.display='none'" alt='/'>
+                                </div>
+                            </div>
+                            <div class="validation_error" th:if="${#fields.hasErrors('choice3')}" th:errors="*{choice3}"></div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="table-light text-center" style="width:2rem;">
+                            <div class="p-1" style="font-size:13px;">④</div>
+                        </td>
+                        <td>
+                            <div class="d-flex flex-row mt-2 mb-2">
+                                <input th:field="*{choice4}" type="text" class="form-control form-control-sm me-2" placeholder="선택지 입력" style="font-size:13px;width:25rem;">
+                                <input type="file" class="form-control form-control-sm" name="choice4Img" style="font-size:13px;width:13rem;">
+                            </div>
+
+                            <div class="d-flex flex-column p-2">
+                                <div th:if="${question.getChoice4Img() eq null}"></div>
+                                <div th:unless="${question.getChoice4Img() eq null}">
+                                    <img class="img-thumbnail mx-auto d-block p-2" style="width:11rem;height:7rem;" th:src="@{|/uploads/${question.getChoice4Img()}|}"  onclick="window.open(this.src)" onerror="this.style.display='none'" alt='/'>
+                                </div>
+                            </div>
+                            <div class="validation_error" th:if="${#fields.hasErrors('choice4')}" th:errors="*{choice4}"></div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+
+            <div class="d-flex flex-row ms-2 mb-1" style="width:42rem;">
+                <div class="p-2">
+                    <label class="form-label mt-1" style="font-size:13px;width:7rem;">정답</label>
+                </div>
+                <div>
+                    <input th:field="*{correctAnswer}" type="text" class="form-control form-control-sm" placeholder="정답 입력" style="width:42rem;">
+                    <div class="validation_error" th:if="${#fields.hasErrors('correctAnswer')}" th:errors="*{correctAnswer}"></div>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-center">
+                <button type="submit" class="btn btn-link btn-sm mt-1 me-2" style="text-decoration:none;color:white;font-size:13px;background-color:rgb(235, 182, 182);">수정</button>
+                <button type="button" class="btn btn-link btn-sm mt-1" style="text-decoration:none;color:white;font-size:13px;background-color: rgb(172, 172, 172);">
+                    <a style="text-decoration:none; color:white;" onclick="cancel();">취소</a>
+                </button>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+
+
+<th:block layout:fragment="script-content">
+    <script>
+        function cancel() {
+        if(confirm("수정하지않고 취소 하시겠습니까?")){
+        window.history.back();
+        }else{
+        window.location.href = '#';
+        }
+        }
+    </script>
+</th:block>

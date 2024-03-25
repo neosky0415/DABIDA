@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      layout:decorate="~{layout/layout}" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>출제 list</title>
+</head>
+
+<div layout:fragment="content">
+
+
+    <h5 class="mt-5 ms-5 mb-3"><i class="bi bi-clipboard-check"></i>나의 정기시험목록</h5>
+    <table class="table table-striped ms-5 mt-3 mb-3" style="width: 100rem;">
+        <tr>
+            <td><strong>순서</strong></td>
+<!--            <td><strong>사진</strong></td>-->
+<!--            <td></td>-->
+            <td><strong>응시자</strong></td>
+            <td><strong>과목</strong></td>
+            <td><strong>시험명</strong></td>
+            <td><strong></strong></td>
+<!--            <td><strong></strong></td>-->
+        </tr>
+        <tr th:each="testStudents, stat : ${testStudentsMyList}">
+            <form th:action="@{/test_number_check/{uuid}(uuid=${testStudents.testNumber.uuid})}"  method="post" class="d-flex">
+            <td>[[${stat.count}]]</td>
+            <td>[[${testStudents.user.realName}]]</td>
+            <td>[[${testStudents.testNumber.subject.subject}]]</td>
+            <td>[[${testStudents.testNumber.testTitle}]]</td>
+                <td>
+                    <button class="flex-shrink-0 btn btn-link btn-sm" type="submit"
+                            style="text-decoration:none;color:white;background-color:rgb(122, 172, 196);width:5rem;">
+                        응시
+                    </button>
+                </td>
+            </form>
+        </tr>
+    </table>
+
+    <h5 class="mt-5 ms-5 mb-3"><i class="bi bi-clipboard-check"></i>나의 정기시험 완료목록</h5>
+    <table class="table table-striped ms-5 mt-3 mb-3" style="width: 100rem;">
+        <tr>
+            <td><strong>순서</strong></td>
+            <!--            <td><strong>사진</strong></td>-->
+            <!--            <td></td>-->
+            <td><strong>응시자</strong></td>
+            <td><strong>과목</strong></td>
+            <td><strong>시험명</strong></td>
+            <td><strong>완료</strong></td>
+            <!--            <td><strong></strong></td>-->
+        </tr>
+        <tr th:each="testStudents, stat : ${summitStudentsMyList}">
+                <td>[[${stat.count}]]</td>
+                <td>[[${testStudents.user.realName}]]</td>
+                <td>[[${testStudents.testNumber.subject.subject}]]</td>
+                <td>[[${testStudents.testNumber.testTitle}]]</td>
+
+            </form>
+        </tr>
+    </table>
+
+    <h5 class="mt-5 ms-5 mb-3"><i class="bi bi-clipboard-check"></i>나의 미니시험목록</h5>
+    <table class="table table-striped ms-5 mt-3 mb-3" style="width: 100rem;">
+        <tr>
+            <td><strong>순서</strong></td>
+            <!--            <td><strong>사진</strong></td>-->
+            <!--            <td></td>-->
+            <td><strong>응시자</strong></td>
+            <td><strong>과목</strong></td>
+            <td><strong>시험명</strong></td>
+            <td><strong></strong></td>
+            <!--            <td><strong></strong></td>-->
+        </tr>
+        <tr th:each="miniTestStudents, stat : ${miniTestStudentsMyList}">
+            <form th:action="@{/miniTest_number_check/{uuid}(uuid=${miniTestStudents.testNumber.uuid})}"  method="post" class="d-flex">
+                <td>[[${stat.count}]]</td>
+                <td>[[${miniTestStudents.user.realName}]]</td>
+                <td>[[${miniTestStudents.testNumber.subject.subject}]]</td>
+                <td>[[${miniTestStudents.testNumber.miniTitle}]]</td>
+                <td>
+                    <button class="flex-shrink-0 btn btn-link btn-sm" type="submit" style="text-decoration:none;color:white;background-color:rgb(122, 172, 196);width:5rem;">
+                        응시
+                    </button>
+                </td>
+            </form>
+        </tr>
+    </table>
+
+    <h5 class="mt-5 ms-5 mb-3"><i class="bi bi-clipboard-check"></i>나의 미니시험 완료목록</h5>
+    <table class="table table-striped ms-5 mt-3 mb-3" style="width: 100rem;">
+        <tr>
+            <td><strong>순서</strong></td>
+            <!--            <td><strong>사진</strong></td>-->
+            <!--            <td></td>-->
+            <td><strong>응시자</strong></td>
+            <td><strong>과목</strong></td>
+            <td><strong>시험명</strong></td>
+            <td><strong>완료</strong></td>
+            <!--            <td><strong></strong></td>-->
+        </tr>
+        <tr th:each="miniTestStudents, stat : ${miniSummitStudentsMyList}">
+            <td>[[${stat.count}]]</td>
+            <td>[[${miniTestStudents.user.realName}]]</td>
+            <td>[[${miniTestStudents.testNumber.subject.subject}]]</td>
+            <td>[[${miniTestStudents.testNumber.miniTitle}]]</td>
+            <!--                <td>[[${testStudents.testNumber.testTitle}]]</td>-->
+            </form>
+        </tr>
+    </table>
+
+    <th:block layout:fragment="script-content">
+
+
+
+
+</th:block>
+
+
+
+
+</div>

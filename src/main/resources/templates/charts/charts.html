@@ -1,0 +1,218 @@
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      layout:decorate="~{manager/managerlayout}"
+>
+
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/charts.js"></script>
+    <script>
+        $(function() {
+
+            var backgroundColors = [
+                'rgba(241, 30, 30, 0.2)',
+                'rgba(15, 56, 241 , 0.2)',
+                'rgba(28, 223, 54, 0.2)',
+                'rgba(235, 152, 58, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(209, 86, 127, 0.2)',
+            ];
+
+            var borderColors = [
+                'rgb(241, 30, 30)', //빨
+                'rgb(15, 56, 241)', //파
+                'rgb(28, 223, 54)', //초
+                'rgb(235, 152, 58)', //주
+                'rgb(209, 86, 127)', //핑
+            ];
+
+            $.getJSON("/rest/pie-data", function(json) {
+                new Chart(document.getElementById("piechartContainer"), {
+                    type: 'pie',
+                    data: {
+                        labels: json[0],
+                        datasets: [{
+                            backgroundColor: backgroundColors,
+                            borderColor: borderColors,
+                            borderWidth: 1,
+                            hoverOffset: 4,
+                            data: json[1]
+                        }]
+                    },
+                    options: {
+                        title: {
+                            display: true,
+                            text: 'Pie Chart'
+                        },
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero:true
+                                }
+                            }]
+                        }
+                    }
+                });
+            });
+
+            $.getJSON("/rest/pie-data", function(json) {
+                new Chart(document.getElementById("barchartContainer"), {
+                    type: 'bar',
+                    data: {
+                        labels: json[0],
+                        datasets: [{
+                            label: 'My First Dataset',
+                            backgroundColor: backgroundColors,
+                            borderColor: borderColors,
+                            borderWidth: 1,
+                            hoverOffset: 4,
+                            data: json[1]
+                        }]
+                    },
+                    options: {
+                        title: {
+                            display: true,
+                            text: 'Bar Chart'
+                        },
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero:true
+                                }
+                            }]
+                        }
+                    }
+                });
+            });
+
+            $.getJSON("/rest/pie-data", function(json) {
+                new Chart(document.getElementById("linechartContainer"), {
+                    type: 'line',
+                    data: {
+                        labels: json[0],
+                        datasets: [{
+                            label: '학생수',
+                            backgroundColor: backgroundColors[4],
+                            borderColor: borderColors[4],
+                            fill: false,
+                            borderWidth: 2,
+                            hoverOffset: 4,
+                            data: json[1]
+                        }]
+                    },
+                    options: {
+                        title: {
+                            display: true,
+                            text: 'Line Chart'
+                        },
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero:true
+                                }
+                            }]
+                        }
+                    }
+                });
+            });
+
+            $.getJSON("/rest/score-data", function(json) {
+                new Chart(document.getElementById("stackchartContainer"), {
+                    type: 'line',
+                    data: {
+                        labels: json[0]["data"],
+                        datasets: [{
+                            label: json[1]["name"],
+                            backgroundColor: backgroundColors[0],
+                            borderColor: borderColors[0],
+                            fill: false,
+                            borderWidth: 1,
+                            hoverOffset: 4,
+                            data: json[1]["data"]
+                        },{
+                            label: json[2]["name"],
+                            backgroundColor: backgroundColors[1],
+                            borderColor: borderColors[1],
+                            fill: false,
+                            borderWidth: 1,
+                            hoverOffset: 4,
+                            data: json[2]["data"]
+                        },{
+                            label: json[3]["name"],
+                            backgroundColor: backgroundColors[2],
+                            borderColor: borderColors[2],
+                            fill: false,
+                            borderWidth: 1,
+                            hoverOffset: 4,
+                            data: json[3]["data"]
+                        }]
+                    },
+                    options: {
+                        title: {
+                            display: true,
+                            text: 'Line Chart'
+                        },
+                        responsive: true,
+                        maintainAspectRatio: false,
+
+
+    				scales: {
+    				yAxes: [{
+    					ticks: {
+    					min: 0, max: 100
+
+
+    					}
+    				}]
+    			}
+
+                    }
+                });
+            });
+
+        });
+    </script>
+</head>
+
+
+
+<body>
+
+
+
+<div layout:fragment="content">
+<div class="container">
+
+    <br/>
+    <br/>
+    <div class="row">
+        <div class="col"  style="width:50rem;" >
+            <canvas id="piechartContainer" width="200" height="300"></canvas>
+        </div>
+        <div class="col" style="width:50rem;" >
+            <canvas id="barchartContainer" width="200" height="300"></canvas>
+        </div>
+    </div>
+    <br/>
+    <br/>
+    <div class="row">
+        <div class="col"style="width:50rem;" >
+            <canvas id="linechartContainer" width="200" height="300"></canvas>
+        </div>
+        <div class="col" style="width:50rem;">
+            <canvas id="stackchartContainer" width="200" height="300"></canvas>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+</body>
+</html>

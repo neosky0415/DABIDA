@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      layout:decorate="~{layout/layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>교육과정</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat&family=Edu+TAS+Beginner:wght@500&family=Shadows+Into+Light&family=Sunflower:wght@300&family=The+Girl+Next+Door&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat&family=Edu+TAS+Beginner:wght@500&family=Noto+Sans+KR&family=Shadows+Into+Light&family=Sunflower:wght@300&family=The+Girl+Next+Door&display=swap" rel="stylesheet">
+</head>
+
+
+
+<div layout:fragment="content">
+    <div class="offset-1 d-flex flex-row mt-3 mb-3" style="font-size:14px;">
+        <a href="/introduce" class="border-end me-2"><div class="p-2" id="in1"><b>우리 학원은?</b></div></a>
+        <a href="/recruitment" class="border-end me-2"><div class="p-2" id="in2"><b>모집안내</b></div></a>
+        <a href="/curriculum" class="border-end me-2"><div class="p-2" id="in3"><b><span style="color:rgb(253, 174, 174);">교육과정</span></b></div></a>
+    </div>
+
+    <div class="offset-3">
+        <h3 class="mt-5 mb-3">연간 지도계획</h3>
+        <div class="ms-1 mt-3 mb-2">모의고사</div>
+        <div class="ms-1" style="font-size:12px; color:rgb(119, 119, 119);">
+            월 1회 이상의 전국,대전,평가원,교육청 수능 모의고사를 실시하며 성적 처리 결과를 통해 자신의 학업 성취도를<br>
+            다른 학생들과 비교하여 가늠해보게 합니다. 연습 모의고사를 통해  자신의 실력을 가늠해보고, 실전 모의고사에 대비할 수 있게 합니다.
+        </div>
+
+        <div class="ms-1 mt-5 mb-2">핵심 체크고사</div>
+        <div class="ms-1" style="font-size:12px; color:rgb(119, 119, 119);">
+            매주 2~3회에 걸쳐 아침고사를 실시하여 국어,영어,수학 각 과목의 진도에 따른 핵심 내용을 체크합니다.<br>
+            시험 결과를 분석하여 취약한 부분을 보완할 수 있게 합니다.
+        </div>
+
+        <div class="ms-1 mt-5 mb-2">테마특강</div>
+        <div class="ms-1" style="font-size:12px; color:rgb(119, 119, 119);">
+            연간 커리큘럼을 작성하여 시기별로 필요한 과정을 과목별,단원별로 부족한 점을 보충할 수 있도록 테마 특강반을 운영합니다.
+        </div>
+
+        <div class="ms-1 mt-5 mb-2">자율학습</div>
+        <div class="ms-1" style="font-size:12px; color:rgb(119, 119, 119);">
+            각 층마다 엄격한 생활지도 교사들이 방과 후 자율학습 시간에도 학생들의 학습 분위기를 책임집니다.<br>
+            방과 후 교실을 자습실로 개방하여 23시까지 자습할 수 있습니다.
+        </div>
+
+        <div class="ms-1 mt-5 mb-2">질의응답</div>
+        <div class="ms-1" style="font-size:12px; color:rgb(119, 119, 119);">
+            요일별로 각 과목 선생님을 배치하여 강과 후 자습을 하다가 모르는 부분이 있을 때 선생님에게 질문할 수 있습니다.
+        </div>
+
+        <div class="ms-1 mt-5 mb-2">하루일과</div>
+        <div class="ms-1" style="font-size:12px; color:rgb(119, 119, 119);">
+            각 과목별 밀도 있는 수업과 세심한 자율학습 관리로 최상의 학슴 분위기를 만듭니다.
+        </div>
+
+
+
+        <table class="table table-danger table-striped ms-1 mt-5 mb-5" style="width:50rem;">
+            <tr>
+                <td style="font-size:13px;width:8rem;color:rgb(85, 85, 85);">구분</td>
+                <td style="font-size:13px;width:21rem;color:rgb(85, 85, 85);">수능 대비</td>
+                <td style="font-size:13px;width:21rem;color:rgb(85, 85, 85);">내신 대비</td>
+            </tr>
+            <tr>
+                <td style="font-size:13px;color:rgb(206, 122, 122);"><b>1학기</b><br>
+                    <span style="font-size:12px;color:rgb(85, 85, 85);">(2월~6월)</span></td>
+                <td style="font-size:12px;color:rgb(85, 85, 85);">
+                    <span style="font-size:13px;color:rgb(206, 122, 122);" class="mb-2"><b>원리 중심 심화학습</b></span><br>
+                    고교 교과과정을 영역별로 심도있게 다루어<br>
+                    기본원리를 이해 시키고 난이도 높은 응용 문제에<br>
+                    대한 적응력을 높임</td>
+                <td style="font-size:12px;color:rgb(85, 85, 85);">
+                    <span style="font-size:13px;color:rgb(206, 122, 122);" class="mb-2"><b>내신 중심 기본학습</b></span><br>
+                    중고등 교과과정을 영역별 기초 확립 및 심도있게 다루어<br>
+                    자기주도적 학습능력 및 사고력 배양
+                </td>
+            </tr>
+            <tr>
+                <td style="font-size:13px;color:rgb(206, 122, 122);"><b>2학기</b><br>
+                    <span style="font-size:12px;color:rgb(85, 85, 85);">(7월~9월)</span></td>
+                <td style="font-size:12px;color:rgb(85, 85, 85);">
+                    <span style="font-size:13px;color:rgb(206, 122, 122);" class="mb-2"><b>핵심정리 & 문제연습</b></span><br>
+                    전 교과를 반복 학습하면서 요점을 총정리하고<br>
+                    문제풀이 연습을 통해 수능 대비를 마무리 합니다.
+                </td>
+                <td style="font-size:12px;color:rgb(85, 85, 85);">
+                    <span style="font-size:13px;color:rgb(206, 122, 122);" class="mb-2"><b>학교별 맞춤 특강</b></span><br>
+                    학교별 기출문제와 해설 및 자료집을 제공하고<br>
+                    학교별 맞춤 예상 문제를 통해 실전에 완벽하게 대비할 수<br>
+                    있습니다.
+                </td>
+            </tr>
+            <tr>
+                <td style="font-size:13px;color:rgb(206, 122, 122);"><b>파이널</b><br>
+                    <span style="font-size:12px;color:rgb(85, 85, 85);">(10월~12월)</span></td>
+                <td style="font-size:12px;color:rgb(85, 85, 85);">
+                    <span style="font-size:13px;color:rgb(206, 122, 122);" class="mb-2"><b>수능 총정리 및 적중 문제풀이</b></span><br>
+                    2학기 과정을 통해 완성된 실력을 실전 문제풀이에<br>
+                    적용하여 수능 대비를 마무리합니다.
+                </td>
+                <td></td>
+            </tr>
+
+        </table>
+
+        <br>
+
+    </div>
+
+
+</div>

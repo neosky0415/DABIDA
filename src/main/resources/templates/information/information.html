@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      layout:decorate="~{layout/layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>응시자격 정보</title>
+</head>
+<div layout:fragment="content">
+
+    <h4 class="ms-5 mt-5"><b>국가기술 자격제도</b></h4>
+    <br>
+    <div class="offset-1 mb-2" style="font-size:16px;"><b>* 응시자격별 안내</b></div>
+
+    <div class="card offset-1" style="width: 65rem;">
+        <div class="card-body">
+            <div class="card-title" style="font-size:15px;"><i class="bi bi-front" style="font-size:10px;"></i> 응시자격서류 제출 <span style="color:red;">유의사항</span></div>
+            <p class="ms-3" style="font-size:13px; color:#747474;">응시자격 서류 제출 유의사항 안내(파일다운로드)
+                <a href="/images/test.txt" download style="text-decoration:none; font-size:17px; color:#306cc5;"><i class="bi bi-download"></i></a>
+            </p>
+            <br>
+            <div class="mb-3"><i class="bi bi-front" style="font-size:10px;"></i> 응시자격
+                <span style="font-size:12px; color:#747474;">※해당항목을 클릭하시면 자세한 내용을 보실 수 있습니다.</span>
+            </div>
+
+            <div style="width:15rem;" class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                <input onclick="showTable('table1')" type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>
+                <label style="font-size:12px;" class="btn btn-outline-primary" for="btnradio1">기술사</label>
+
+                <input onclick="showTable('table2')" type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
+                <label style="font-size:12px;" class="btn btn-outline-primary" for="btnradio2">기능장</label>
+
+                <input onclick="showTable('table3')" type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off">
+                <label style="font-size:12px;" class="btn btn-outline-primary" for="btnradio3">산업기사</label>
+            </div>
+
+
+            <table class="table table-striped mt-3" id="table1" >
+                <tr>
+                    <th>등급</th>
+                    <th>응시자격</th>
+                </tr>
+                <tr>
+                    <th style="font-size:15px;" scope="row">기술사</th>
+                    <td style="font-size:13px; color:#747474;">
+                        다음 각 호의 어느 하나에 해당하는 사람<br>
+                        <br>
+                        1. 기사 자격을 취득한 후 응시하려는 종목이 속하는 직무분야(고용노동부령으로 정하는 유사 직무분야를 포함한다.<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;이하 “동일 및 유사 직무분야”라 한다)에서 4년 이상 실무에 종사한 사람<br>
+                        <br>
+                        2. 산업기사 자격을 취득한 후 응시하려는 종목이 속하는 동일 및 유사 직무분야에서 5년 이상 실무에 종사한 사람<br>
+                        <br>
+                        3. 기능사 자격을 취득한 후 응시하려는 종목이 속하는 동일 및 유사 직무분야에서 7년 이상 실무에 종사한 사람<br>
+                        <br>
+                        4. 응시하려는 종목과 관련된 학과로서 고용노동부장관이 정하는 학과(이하 “관련학과”라 한다)의 대학졸업자등으로서<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;졸업 후 응시하려는 종목이 속하는 동일 및 유사 직무분야에서 6년 이상 실무에 종사한 사람<br>
+                        <br>
+                        5. 응시하려는 종목이 속하는 동일 및 유사직무분야의 다른 종목의 기술사 등급의 자격을 취득한 사람<br>
+                        <br>
+                        6. 3년제 전문대학 관련학과 졸업자등으로서 졸업 후 응시하려는 종목이 속하는 동일 및 유사 직무분야에서 7년 이상 실무에 종사한 사람<br>
+                        <br>
+                        7. 2년제 전문대학 관련학과 졸업자등으로서 졸업 후 응시하려는 종목이 속하는 동일 및 유사 직무분야에서 8년 이상 실무에 종사한 사람<br>
+                        <br>
+                        8. 국가기술자격의 종목별로 기사의 수준에 해당하는 교육훈련을 실시하는 기관 중 고용노동부령으로 정하는<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;교육훈련기관의 기술훈련과정(이하 “기사 수준 기술훈련과정”이라 한다) 이수자로서 이수 후 응시하려는 종목이 속하는<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;동일 및 유사 직무분야에서 6년 이상 실무에 종사한 사람<br>
+                        <br>
+                        9. 국가기술자격의 종목별로 산업기사의 수준에 해당하는 교육훈련을 실시하는 기관 중 고용노동부령으로 정하는<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;교육훈련기관의 기술훈련과정(이하 “산업기사 수준 기술훈련과정”이라 한다) 이수자로서 이수 후 동일 및 유사 직무분야에서<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;8년 이상 실무에 종사한 사람<br>
+                        <br>
+                        10. 응시하려는 종목이 속하는 동일 및 유사 직무분야에서 9년 이상 실무에 종사한 사람<br>
+                        <br>
+                        11. 외국에서 동일한 종목에 해당하는 자격을 취득한 사람<br></td>
+                </tr>
+                <tr>
+                    <th style="font-size:15px;" scope="row"> 비 고</th>
+                    <td style="font-size:13px; color:#747474;">
+                        1. “졸업자등”이란 「초ㆍ중등교육법」 및 「고등교육법」에 따른 학교를 졸업한 사람 및 이와 같은 수준 이상의 학력이 있다고<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;인정되는 사람을 말한다. 다만, 대학(산업대학 등 수업연한이 4년 이상인 학교를 포함한다. 이하 “대학등”이라 한다) 및 대학원을 <br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;수료한 사람으로서 관련 학위를 취득하지 못한 사람은 “대학졸업자등”으로 보고,<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;대학등의 전 과정의 2분의 1 이상을 마친 사람은 “2년제 전문대학졸업자등”으로 본다.<br>
+                        <br>
+                        2. “졸업예정자”란 국가기술자격 검정의 필기시험일(필기시험이 없거나 면제되는 경우에는 실기시험의 수험원서 접수마감일을 말한다.<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;이하 같다) 현재 「초ㆍ중등교육법」 및 「고등교육법」에 따라 정해진 학년 중 최종 학년에 재학 중인 사람을 말한다.<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;다만, 「학점인정 등에 관한 법률」 제7조에 따라 106학점 이상을 인정받은 사람<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(「학점인정 등에 관한 법률」에 따라 인정받은 학점 중 「고등교육법」 제2조제1호부터 제6호까지의 규정에 따른 대학 재학 중<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;취득한 학점을 전환하여 인정받은 학점 외의 학점이 18학점 이상 포함되어야 한다)은 대학졸업예정자로 보고,<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;81학점 이상을 인정받은 사람은 3년제 대학졸업예정자로 보며, 41학점 이상을 인정받은 사람은 2년제 대학졸업예정자로 본다.<br>
+                        <br>
+                        3. 「고등교육법」 제50조의2에 따른 전공심화과정의 학사학위를 취득한 사람은 대학졸업자로 보고,<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;그 졸업예정자는 대학졸업예정자로 본다.<br>
+                        <br>
+                        4. “이수자”란 기사 수준 기술훈련과정 또는 산업기사 수준 기술훈련과정을 마친 사람을 말한다.<br>
+                        <br>
+                        5. “이수예정자”란 국가기술자격 검정의 필기시험일 또는 최초 시험일 현재 기사 수준<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;기술훈련과정 또는 산업기사 수준 기술훈련과정에서 각 과정의 2분의 1을 초과하여 교육훈련을 받고 있는 사람을 말한다.
+                        <br></td>
+                </tr>
+            </table>
+
+
+            <table class="table table-striped mt-3" id="table2" style="display: none;">
+                <tr>
+                    <th>등급</th>
+                    <th>응시자격</th>
+                </tr>
+                <tr>
+                    <th style="font-size:15px;" scope="row">기능장</th>
+                    <td style="font-size:13px; color:#747474;">
+                        <br>
+                        다음 각 호의 어느 하나에 해당하는 사람<br>
+                        <br>
+                        1. 응시하려는 종목이 속하는 동일 및 유사 직무분야의 산업기사 또는 기능사 자격을 취득한 후<br>
+                        &nbsp;&nbsp;「근로자직업능력 개발법」에 따라 설립된 기능대학의 기능장과정을 마친 이수자 또는 그 이수예정자<br>
+                        <br>
+                        2. 산업기사 등급 이상의 자격을 취득한 후 응시하려는 종목이 속하는 동일 및 유사 직무분야에서 5년 이상 실무에 종사한 사람<br>
+                        <br>
+                        3. 기능사 자격을 취득한 후 응시하려는 종목이 속하는 동일 및 유사 직무분야에서 7년 이상 실무에 종사한 사람<br>
+                        <br>
+                        4. 응시하려는 종목이 속하는 동일 및 유사 직무분야에서 9년 이상 실무에 종사한 사람<br>
+                        <br>
+                        5. 응시하려는 종목이 속하는 동일 및 유사직무분야의 다른 종목의 기능장 등급의 자격을 취득한 사람<br>
+                        <br>
+                        6. 외국에서 동일한 종목에 해당하는 자격을 취득한 사람<br>
+                        <br></td>
+                </tr>
+                <tr>
+                    <th style="font-size:15px;" scope="row">비 고</th>
+                    <td style="font-size:13px; color:#747474;" >
+                        <br>
+                        1. “졸업자등”이란 「초ㆍ중등교육법」 및 「고등교육법」에 따른 학교를 졸업한 사람 및 이와 같은 수준 이상의 학력이 있다고<br>
+                        &nbsp;&nbsp;&nbsp;인정되는 사람을 말한다.<br>
+                        &nbsp;&nbsp;&nbsp;다만, 대학(산업대학 등 수업연한이 4년 이상인 학교를 포함한다. 이하 “대학등”이라 한다) 및 대학원을 수료한 사람으로서<br>
+                        &nbsp;&nbsp;&nbsp;관련 학위를 취득하지 못한 사람은 “대학졸업자등”으로 보고, 대학등의 전 과정의 2분의 1 이상을 마친 사람은 “2년제 전문대학졸업자등”으로 본다.<br>
+                        <br>
+                        2. “졸업예정자”란 국가기술자격 검정의 필기시험일(필기시험이 없거나 면제되는 경우에는 실기시험의 수험원서 접수마감일을 말한다. 이하 같다)<br>
+                        &nbsp;&nbsp;&nbsp;현재 「초ㆍ중등교육법」 및 「고등교육법」에 따라 정해진 학년 중 최종 학년에 재학 중인 사람을 말한다.<br>
+                        &nbsp;&nbsp;&nbsp;다만, 「학점인정 등에 관한 법률」 제7조에 따라 106학점 이상을 인정받은 사람(「학점인정 등에 관한 법률」에 따라 인정받은 학점 중<br>
+                        &nbsp;&nbsp;&nbsp;「고등교육법」 제2조제1호부터 제6호까지의 규정에 따른 대학 재학 중 취득한 학점을 전환하여 인정받은 학점 외의 학점이 18학점 이상 포함되어야 한다)은<br>
+                        &nbsp;&nbsp;&nbsp;대학졸업예정자로 보고, 81학점 이상을 인정받은 사람은 3년제 대학졸업예정자로 보며, 41학점 이상을 인정받은 사람은 2년제 대학졸업예정자로 본다.<br>
+                        <br>
+                        3. 「고등교육법」 제50조의2에 따른 전공심화과정의 학사학위를 취득한 사람은 대학졸업자로 보고, 그 졸업예정자는 대학졸업예정자로 본다.<br>
+                        <br>
+                        4. “이수자”란 기사 수준 기술훈련과정 또는 산업기사 수준 기술훈련과정을 마친 사람을 말한다.<br>
+                        <br>
+                        5. “이수예정자”란 국가기술자격 검정의 필기시험일 또는 최초 시험일 현재 기사 수준 기술훈련과정 또는 산업기사 수준 기술훈련과정에서<br>
+                        &nbsp;&nbsp;&nbsp;각 과정의 2분의 1을 초과하여 교육훈련을 받고 있는 사람을 말한다.<br>
+                </tr>
+            </table>
+
+            <table class="table table-striped mt-3" id="table3" style="display: none;">
+                <tr>
+                    <th>등급</th>
+                    <th>응시자격</th>
+                </tr>
+                <tr>
+                    <th style="font-size:15px;" scope="row">산업기사</th>
+                    <td style="font-size:13px; color:#747474;">
+                        <br>
+                        다음 각 호의 어느 하나에 해당하는 사람<br>
+                        <br>
+                        1. 기능사 등급 이상의 자격을 취득한 후 응시하려는 종목이 속하는 동일 및 유사 직무분야에<br>
+                        1년 이상 실무에 종사한 사람<br>
+                        <br>
+                        2. 응시하려는 종목이 속하는 동일 및 유사 직무분야의 다른 종목의 산업기사 등급 이상의 자격을 취득한 사람<br>
+                        <br>
+                        3. 관련학과의 2년제 또는 3년제 전문대학졸업자 등 또는 그 졸업예정자<br>
+                        <br>
+                        4. 관련학과의 대학졸업자 등 또는 그 졸업예정자<br>
+                        <br>
+                        5. 동일 및 유사 직무분야의 산업기사 수준 기술훈련과정 이수자 또는 그 이수예정자<br>
+                        <br>
+                        6. 응시하려는 종목이 속하는 동일 및 유사 직무분야에서 2년 이상 실무에 종사한 사람<br>
+                        <br>
+                        7. 고용노동부령으로 정하는 기능경기대회 입상자<br>
+                        <br>
+                        8. 외국에서 동일한 종목에 해당하는 자격을 취득한 사람<br>
+                    </td>
+                </tr>
+                <tr>
+                    <th style="font-size:15px;" scope="row">비 고</th>
+                    <td style="font-size:13px; color:#747474;" >
+                        <br>
+                        1. “졸업자등”이란 「초ㆍ중등교육법」 및 「고등교육법」에 따른 학교를 졸업한 사람 및 이와 같은 수준 이상의 학력이 있다고<br>
+                        인정되는 사람을 말한다.<br>
+                        다만, 대학(산업대학 등 수업연한이 4년 이상인 학교를 포함한다. 이하 “대학등”이라 한다) 및 대학원을 수료한 사람으로서<br>
+                        관련 학위를 취득하지 못한 사람은 “대학졸업자등”으로 보고, 대학등의 전 과정의 2분의 1 이상을 마친 사람은 “2년제 전문대학졸업자등”으로 본다.<br>
+                        <br>
+                        2. “졸업예정자”란 국가기술자격 검정의 필기시험일(필기시험이 없거나 면제되는 경우에는 실기시험의 수험원서 접수마감일을 말한다. 이하 같다)<br>
+                        현재 「초ㆍ중등교육법」 및 「고등교육법」에 따라 정해진 학년 중 최종 학년에 재학 중인 사람을 말한다.<br>
+                        다만, 「학점인정 등에 관한 법률」 제7조에 따라 106학점 이상을 인정받은 사람(「학점인정 등에 관한 법률」에 따라 인정받은 학점 중<br>
+                        「고등교육법」 제2조제1호부터 제6호까지의 규정에 따른 대학 재학 중 취득한 학점을 전환하여 인정받은 학점 외의 학점이 18학점 이상 포함되어야 한다)은<br>
+                        대학졸업예정자로 보고, 81학점 이상을 인정받은 사람은 3년제 대학졸업예정자로 보며, 41학점 이상을 인정받은 사람은 2년제 대학졸업예정자로 본다.<br>
+                        <br>
+                        3. 「고등교육법」 제50조의2에 따른 전공심화과정의 학사학위를 취득한 사람은 대학졸업자로 보고, 그 졸업예정자는 대학졸업예정자로 본다.<br>
+                        <br>
+                        4. “이수자”란 기사 수준 기술훈련과정 또는 산업기사 수준 기술훈련과정을 마친 사람을 말한다.<br>
+                        <br>
+                        5. “이수예정자”란 국가기술자격 검정의 필기시험일 또는 최초 시험일 현재 기사 수준 기술훈련과정 또는 산업기사 수준 기술훈련과정에서<br>
+                        각 과정의 2분의 1을 초과하여 교육훈련을 받고 있는 사람을 말한다.<br>
+                </tr>
+            </table>
+
+
+        </div>
+    </div>
+    <br>
+
+</div>
+
+<th:block layout:fragment="script-content">
+    <script>
+        function showTable(tableId) {
+            var tables = document.getElementsByTagName("table");
+            for (var i = 0; i < tables.length; i++) {
+                if (tables[i].id === tableId) {
+                    tables[i].style.display = "block";
+                } else {
+                    tables[i].style.display = "none";
+                }
+            }
+        }
+    </script>
+
+</th:block>
